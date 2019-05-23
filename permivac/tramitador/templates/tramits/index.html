@@ -1,0 +1,12 @@
+{% extends 'tramits/base.html' %}
+{% block content %}
+  {% if ultims_tramits %}
+    <ul>
+      {% for tramit in ultims_tramits %}
+        <li><a href="{% url 'detall' detall.id %}">{{tramit.treballador.username}};{{tramit.data_sol}}</a></li>
+      {% endfor %}
+    </ul>
+    {% else %}
+      <p>No hi han tramits recents...</p>
+  {% endif %}
+{% endblock %}

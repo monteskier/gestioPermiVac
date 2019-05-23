@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls import url
 
+
+admin.site.site_header = "RRHH AjSVC Admin"
+admin.site.site_title = "RRHH AjSVC Portal"
+admin.site.index_title = "Benvingut al tramitador de RRHH AjSVC"
 urlpatterns = [
-    path('tramitador/', include('tramitador.urls')),
-    path('admin/', admin.site.urls),
+    url(r'^tramitador/', include('tramitador.urls')),
+    url(r'^admin/', admin.site.urls),
 ]

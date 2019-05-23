@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tramitador',
+    'crispy_forms',
 ]
+AUTH_USER_MODEL = 'tramitador.Treballadors'#nueva linea, para customizar el nuevo tipo de usuario como trabajadores jma
+CRISPY_TEMPLATE_PACK = 'bootstrap3' # nueva linea para cargar bootstrap3 en el formulario de autentificacion jma
+AUTH_USER_MODEL = 'tramitador.Treballadors'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,11 +55,13 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'permivac.urls'
+LOGIN_REDIRECT_URL = '/tramitador/'
+AUTH_USER_MODEL = "tramitador.Treballadors"
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -104,7 +110,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ca'
 
 TIME_ZONE = 'UTC'
 
