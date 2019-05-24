@@ -1,0 +1,15 @@
+{% extends 'tramits/base.html'%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div id="main_table">
+
+  <h4>Nova Sol·licitud de Permissos i Vacances</h4>
+  <form method="POST" class="post-form">
+    {{ form|crispy }}
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <input class="btn btn-default" type="submit" value="Desar">
+  </form>
+</div>
+{% endblock %}

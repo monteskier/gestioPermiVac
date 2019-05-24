@@ -1,10 +1,28 @@
-#main_block{
+#heading{
   display:flex;
   flex-direction: row;
+  justify-content: flex-end;
   width: 90%;
   height: auto;
-  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  text-decoration: underline;
+  font-weight: bold;
+  /*border-style: groove;
+  border-color: red;*/
 
+}
+#main_block{
+  display:flex;
+  flex-direction:column;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  justify-content: center;
+  /*border-style: groove;
+  border-color: blue;*/
 }
 #login_block{
   flex-direction: column;
@@ -12,6 +30,50 @@
   display:flex;
   width: 300px;
   height: auto;
+  justify-content: center;
   border-width: thin;
   border-style: solid;
+}
+#options_block{
+  display: block;
+  flex-direction:row;
+  width: 100%;
+  height: auto;
+  /*border-style: groove;
+  border-color: green;*/
+}
+#main_table table{
+
+
+  width: 800px;
+  height: auto;
+  padding: 5px;
+}
+
+ul.menu_options  {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.menu_options li {
+  float: left;
+}
+
+ul.menu_options li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.menu_options li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
 }

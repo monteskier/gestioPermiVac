@@ -1,11 +1,22 @@
 {% extends 'tramits/base.html' %}
+
 {% block content %}
-  {% if ultims_tramits %}
-    <ul>
-      {% for tramit in ultims_tramits %}
-        <li><a href="{% url 'detall' detall.id %}">{{tramit.treballador.username}};{{tramit.data_sol}}</a></li>
+
+  {% if tramits_pendents %}
+  <h4>Tramits Pendents de finalitzar:</h4>
+  <div id="main_table">
+    <table>
+      <tr>
+        <th>Dates de la Solicitud i link</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th>
+      </tr>
+      {% for tramit in tramits_pendents %}
+      <tr>
+        <td><a href="{% url 'tramit_detall' tramit.id %}">{{tramit.data_sol}}</a></td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
+        <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" class="glyphicon glyphicon-remove"></a></td>
+      </tr>
       {% endfor %}
-    </ul>
+    </table>
+    </div>
     {% else %}
       <p>No hi han tramits recents...</p>
   {% endif %}

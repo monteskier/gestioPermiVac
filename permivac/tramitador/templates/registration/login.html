@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="main_block">
+
   <div id="login_block">
     <form action="{% url "login" %}" method="post" accept-charset="utf-8">
       {{ form|crispy }}
@@ -21,6 +21,6 @@
     {# Assumes you setup the password_reset view in your URLconf #}
     <p><a href="{% url 'password_reset' %}">Has oblidat la contrasenya?</a></p>
   </div>
-</div>
+
 
 {% endblock %}

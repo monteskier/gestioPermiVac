@@ -26,16 +26,16 @@ class Treballadors(AbstractUser):
         ('baixa','Baixa'),
     )
     creat_en = models.DateTimeField(auto_now_add=True)
-    modificat_en = models.DateTimeField(auto_now=True)
+    modificat_en = models.DateTimeField(auto_now=True)"""
     usuari = models.CharField(max_length=20)
-    nom = models.CharField(max_length=20)
+    """nom = models.CharField(max_length=20)
     cognoms = models.CharField(max_length=20)
     email = models.CharField(max_length=50)"""
     dni = models.CharField(max_length=20, null = True, blank=True)
     area = models.CharField(max_length=200,choices = tip_areas, default = 'SO')
     """rol = models.CharField(max_length=20, choices = tip_rols, default = 'treb')
     estat = models.CharField(max_length=10, choices = tip_estats, default = 'alta')"""
-    
+
     def __str__(self):
         return self.username
 
@@ -58,6 +58,7 @@ class Tramit(models.Model):
     modificat_en = models.DateTimeField(auto_now=True)
     data_sol = models.CharField(max_length=250)
     tipus = models.CharField(max_length=40, choices=tipologia, default='asum_p')
+    finalitzat = models.BooleanField(default=False)
 
     """Validacio del responsable"""
     valResp =  models.CharField(max_length=7, choices=validacio, default='espera')

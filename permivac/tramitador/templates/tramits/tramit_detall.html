@@ -1,0 +1,16 @@
+{% extends 'tramits/base.html' %}
+{% block content %}
+  <div id="tramit">
+    <h4>Dades Personals:</h4>
+    <p>Nom: {{tramit.treballador.first_name}}</p>
+    <p>Cognoms: {{tramit.treballador.last_name}}</p>
+    <p>Area:{{tramit.treballador.area}}</p>
+    <h4>Dades de la Solicitud:</h4>
+    <p>Dates de la Solicitud: {{tramit.data_sol}}</p>
+    <p>Missatge del interessat: {{tramit.missatge_usuari}}</p>
+    <h4>Estat de la Tramitacio:</h4>
+    <p>Validacio del Responsable: {{tramit.valResp}}</p>
+    <p>Validacio del Politic:{{tramit.valPol}}</p>
+    <p>Missatge Responsable:{{tramit.missatge_responsable}}</p>
+  </div>
+{% endblock %}
