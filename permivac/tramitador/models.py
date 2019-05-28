@@ -68,6 +68,8 @@ class Tramit(models.Model):
     tipus = models.CharField(max_length=40, choices=tipologia, default='asum_p')
     finalitzat = models.BooleanField(default=False)
 
+    """Validacio de RRHH"""
+    valRRHH = models.CharField(max_length=7, choices=validacio, default='espera')
 
     """Validacio del responsable"""
     valResp =  models.CharField(max_length=7, choices=validacio, default='espera')
