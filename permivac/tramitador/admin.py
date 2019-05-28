@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Treballadors
-from .models import Tramit
+from .models import Treballadors, Tramit, Document
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
@@ -47,5 +47,8 @@ class TramitAdmin(admin.ModelAdmin):
     def get_treballador_area(self, obj):
         return obj.treballador.area
 
+class DocumentAdmin(admin.ModelAdmin):
+    list_display=('descripcio','document')
 
 admin.site.register(Tramit, TramitAdmin)
+admin.site.register(Document, DocumentAdmin)

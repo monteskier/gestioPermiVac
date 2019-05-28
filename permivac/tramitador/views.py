@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-from .models import Tramit
-from .forms import TramitSolForm
+from .models import Tramit, Document
+from .forms import TramitSolForm, DocumentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-
-
+from django.core.files.storage import FileSystemStorage
+import os, datetime
+from django.conf import settings
 # Create your views here.
 
 def index(request):
@@ -56,3 +58,27 @@ def nou_tramit(request):
         form = TramitSolForm()
         #return render(request, 'tramits/tramit_edit.html', {'form':form})
         return render(request, 'tramits/tramit_edit.html',{'form':form})
+
+def upload_document(request):
+    if request.method == 'POST' and request.FILES['document'] and request.POST['pk'] != 0:
+        pk = int(request.POST['pk'])
+        tramit = get_object_or_404(Tramit, pk=pk)
+
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.tramit = tramit
+            post.pujat_per = request.user
+            post.descripcio = "DOC_"+tramit.tipus+"_"+str(datetime.datetime.now())
+            post.save()
+            tramit.document = post
+            tramit.save()
+            response_data = {}
+            response_data['result'] = 'OK'
+            response_data['message'] = "Document dessat correctament al Tramit corresponent."
+            return JsonResponse(response_data)
+        else:
+            response_data = {}
+            response_data['result'] = 'ERROR'
+            response_data['message'] = "Document no s'ha dessat correctament al Tramit corresponent."
+            return JsonResponse(response_data)

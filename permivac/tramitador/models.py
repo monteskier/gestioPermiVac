@@ -39,7 +39,14 @@ class Treballadors(AbstractUser):
     def __str__(self):
         return self.username
 
+class Document(models.Model):
+    descripcio = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='%Y/%m/')
+    pujat_en = models.DateTimeField(auto_now_add=True)
+    pujat_per = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.descripcio
 
 class Tramit(models.Model):
     validacio = (
@@ -54,11 +61,13 @@ class Tramit(models.Model):
         ('asum_p', 'Asumptes personals'),
     )
     treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
+    document = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True)
     creat_en = models.DateTimeField(auto_now_add=True)
     modificat_en = models.DateTimeField(auto_now=True)
     data_sol = models.CharField(max_length=250)
     tipus = models.CharField(max_length=40, choices=tipologia, default='asum_p')
     finalitzat = models.BooleanField(default=False)
+
 
     """Validacio del responsable"""
     valResp =  models.CharField(max_length=7, choices=validacio, default='espera')

@@ -1,6 +1,8 @@
 from django.urls import include, path
 from django.conf.urls import url
 from django.urls import reverse
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 
 urlpatterns = [
@@ -8,7 +10,11 @@ urlpatterns = [
     url(r'^nou_tramit/',views.nou_tramit, name='nou_tramit'),
     path('tramit/<int:pk>/', views.tramit_detall, name='tramit_detall'),
     path('tramit_eliminar/<int:pk>/', views.tramit_eliminar, name='tramit_eliminar'),
+    path('upload_document/', views.upload_document, name='pujar_document'),
     #url(r'^(?P<tramit_id>[0-9]+)/$',views.detall, name='detall'),
     #new line logins system jma
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

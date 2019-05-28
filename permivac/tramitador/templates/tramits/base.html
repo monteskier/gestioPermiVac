@@ -27,22 +27,26 @@
     </div>
     {% if user.is_authenticated %}
 
-    <div id="main_block">
-      <div id="options_block">
-        <ul class="menu_options">
-          <li><a href="{% url 'index' %}" class="active">Inici</a></li>
-          <li><a href="{% url 'nou_tramit' %}"class ="glyphicon glyphicon-plus">Solicitud</a></li>
-          <li><a href="/hisotric">Historic</a></li>
-          <li><a href="/infor">Informacio sobre el Tramit</a></li>
-        </ul>
+      <div id="main_block">
+        <div id="options_block">
+          <ul class="menu_options">
+            <li><a href="{% url 'index' %}" class="active">Inici</a></li>
+            <li><a href="{% url 'nou_tramit' %}"class ="glyphicon glyphicon-plus">Solicitud</a></li>
+            <li><a href="/hisotric">Historic</a></li>
+            <li><a href="/infor">Informacio sobre el Tramit</a></li>
+          </ul>
+        </div>
+        {% block content %}
+        {% endblock %}
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
       </div>
-      {% block content %}
+      {% block javascript %}
       {% endblock %}
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    </div>
+
     {% endif %}
+
   </body>
 </html>

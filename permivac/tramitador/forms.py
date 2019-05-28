@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
-from .models import Treballadors, Tramit
+from .models import Treballadors, Tramit, Document
 
 class CustomUserCreationForm(UserCreationForm):
 
@@ -18,3 +18,8 @@ class TramitSolForm(forms.ModelForm): #Classe per el formulari de nou tramit, se
     class Meta:
         model = Tramit
         fields = ('data_sol','tipus', 'missatge_usuari')
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ('document',)

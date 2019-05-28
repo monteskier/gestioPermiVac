@@ -43,9 +43,7 @@
   border-color: green;*/
 }
 #main_table table{
-
-
-  width: 800px;
+  width: 90%;
   height: auto;
   padding: 5px;
 }
@@ -76,4 +74,7 @@ ul.menu_options li a:hover:not(.active) {
 
 .active {
   background-color: #4CAF50;
+}
+a, i {cursor: pointer;
+
 }

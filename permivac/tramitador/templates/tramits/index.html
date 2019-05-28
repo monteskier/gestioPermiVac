@@ -7,12 +7,20 @@
   <div id="main_table">
     <table>
       <tr>
-        <th>Dates de la Solicitud i link</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th>
+        <th>Dates de la Solicitud i link</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th>
       </tr>
       {% for tramit in tramits_pendents %}
       <tr>
         <td><a href="{% url 'tramit_detall' tramit.id %}">{{tramit.data_sol}}</a></td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
         <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" class="glyphicon glyphicon-remove"></a></td>
+        <td>
+          {% if tramit.document %}
+
+            <a href='{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
+          {% else %}
+            <input type="file"  data-tramit="{{tramit.pk}}" />
+            <input type="button" class="glyphicon glyphicon-open-file" value="Enviar" id="pujar"/>
+          {% endif %}</td>
       </tr>
       {% endfor %}
     </table>
@@ -20,4 +28,37 @@
     {% else %}
       <p>No hi han tramits recents...</p>
   {% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script>
+  $(document).ready(function(){
+    $("#pujar").click(function(){
+      $doc = $(this).prev();
+      console.log($doc.val()+"pk="+$doc.data('tramit'));
+      if($doc.prop('files').length > 0){
+        var token = '{{csrf_token}}';
+        $formdata = new FormData();
+        $docu = $doc.prop('files')[0];
+        $pk = $doc.data('tramit');
+        $formdata.append("document", $docu);
+        $formdata.append("pk",$pk);
+        console.log($formdata);
+        $.ajax({
+          headers: { "X-CSRFToken": token },
+          url: "{% url 'pujar_document' %}",
+          type: "POST",
+          data: $formdata,
+          processData: false,
+          contentType: false,
+          success: function (result) {
+           console.log("Result :"+result.result+", MSG:"+result.message);
+           alert(result.message);
+          }
+        });
+      }
+    });
+  });
+</script>
+
 {% endblock %}
