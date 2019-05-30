@@ -78,3 +78,6 @@ ul.menu_options li a:hover:not(.active) {
 a, i {cursor: pointer;
 
 }
+.amagat{
+  display:none;
+}

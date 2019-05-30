@@ -29,6 +29,10 @@ def tramit_eliminar(request, pk):
     tramit.delete()
     return redirect('/tramitador/')
 
+@login_required
+def assignades(request):
+    return redirect('/tramitador/')
+
 """def login(request):
     if(request.method=='POST'):
         usuari = request.POST.get("username");

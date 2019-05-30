@@ -11,6 +11,7 @@ urlpatterns = [
     path('tramit/<int:pk>/', views.tramit_detall, name='tramit_detall'),
     path('tramit_eliminar/<int:pk>/', views.tramit_eliminar, name='tramit_eliminar'),
     path('upload_document/', views.upload_document, name='pujar_document'),
+    path('assignades/',views.assignades, name="assignades"),
     #url(r'^(?P<tramit_id>[0-9]+)/$',views.detall, name='detall'),
     #new line logins system jma
     path('accounts/', include('django.contrib.auth.urls')),
