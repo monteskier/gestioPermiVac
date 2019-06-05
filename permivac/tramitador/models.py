@@ -6,16 +6,13 @@ import datetime
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 
+class Area(models.Model):
+    nom = models.CharField(max_length=100)
+    def __str__(self):
+        return self.nom
+
 class Treballadors(AbstractUser):
 
-    tip_areas = (
-        ('SE','Serveis Econòmics'),
-        ('ST','Serveis Territorials'),
-        ('SP','Serveis Personals'),
-        ('SC','Seguretat Ciutadana'),
-        ('SI','Serveis Interns'),
-        ('SO', 'Serveis Organització'),
-    )
     """tip_rols = (
         ('treb', 'Treballador'),
         ('resp', 'Responsable'),
@@ -32,7 +29,7 @@ class Treballadors(AbstractUser):
     cognoms = models.CharField(max_length=20)
     email = models.CharField(max_length=50)"""
     dni = models.CharField(max_length=20, null = True, blank=True)
-    area = models.CharField(max_length=200,choices = tip_areas, default = 'SO')
+    areas = models.ManyToManyField(Area)
     """rol = models.CharField(max_length=20, choices = tip_rols, default = 'treb')
     estat = models.CharField(max_length=10, choices = tip_estats, default = 'alta')"""
 

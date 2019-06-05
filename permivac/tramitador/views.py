@@ -11,6 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.files.storage import FileSystemStorage
 import os, datetime
 from django.conf import settings
+from django.db.models import Q
 # Create your views here.
 
 def index(request):
@@ -31,7 +32,32 @@ def tramit_eliminar(request, pk):
 
 @login_required
 def assignades(request):
-    return redirect('/tramitador/')
+    groups = request.user.groups.all()
+    rol = ""
+    l = []
+    for g in groups:
+        l.append(g.name)
+
+    if "responsables" in l:
+        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( valResp = "espera").exclude(finalitzat = True)
+        if "RRHH" in l:
+            tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( Q(valResp = "conforme") | Q(valResp = "espera")).exclude(finalitzat = True)
+            rol = "RRHH"
+        else:
+            tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).exclude(finalitzat = True)
+            rol = "responsables"
+
+
+    elif "RRHH" in l:
+        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter(valResp = "espera").exclude(finalitzat = True)
+        rol = "RRHH"
+
+    elif "politics" in l:
+        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter(valRRHH = "espera").exclude(finalitzat = True)
+        rol = 'politics'
+
+    context = {'tramits_pendents': tramits_pendents,'rol': rol}
+    return render(request, 'tramits/assignades.html', context)
 
 """def login(request):
     if(request.method=='POST'):

@@ -36,7 +36,7 @@
             <li><a href="{% url 'nou_tramit' %}"class ="glyphicon glyphicon-plus">Solicitud</a></li>
 
             {% if request.user|has_group:"RRHH;responsables;politics" %}
-              <li><a href="/assignades/">Assignades</a></li>
+              <li><a href="{% url 'assignades' %}">Assignades</a></li>
             {% endif %}
 
             <li><a href="/hisotric">Historic</a></li>

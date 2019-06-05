@@ -8,6 +8,7 @@
     <table>
       <tr>
         <th>Dates de la Solicitud i link</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th>
+        <th>Validacio responsable</th><th>Validacio RRHH</th><th>Validacio Politic</th>
       </tr>
       {% for tramit in tramits_pendents %}
       <tr>
@@ -20,7 +21,9 @@
           {% else %}
             <input type="file"  data-tramit="{{tramit.pk}}" />
             <input type="button" class="glyphicon glyphicon-open-file" value="Enviar" id="pujar"/>
-          {% endif %}</td>
+          {% endif %}
+        </td>
+        <td>{{tramit.valResp}}</td><td>{{tramit.valRRHH}}</td><td>{{tramit.valPol}}</td>
       </tr>
       {% endfor %}
     </table>
