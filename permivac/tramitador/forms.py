@@ -18,6 +18,18 @@ class TramitSolForm(forms.ModelForm): #Classe per el formulari de nou tramit, se
     class Meta:
         model = Tramit
         fields = ('data_sol','tipus', 'missatge_usuari')
+        widgets = {
+            'data_sol': forms.TextInput(attrs = {'size':100}),
+            'missatge_usuari':forms.Textarea(attrs={'rows':4, 'cols':150}),
+            }
+        labels = {
+            'data_sol': ('Data/es que es sol·licita/en:'),
+            'tipus': ('Tipus de permís:'),
+            'missatge_usuari' : ('Missatge optatiu a destacar:'),
+        }
+        help_text = {
+            'data_sol': ("Interval de dates amb guións '-', per dies no consecutios emprar ',' Exemple:01/01/2019 - 05/01/2019, 07/01/2019" ),
+        }
 
 class DocumentForm(forms.ModelForm):
     class Meta:

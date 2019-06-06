@@ -6,8 +6,17 @@
 
   <h4>Nova Sol·licitud de Permissos i Vacances</h4>
   <form method="POST" class="post-form">
-    {{ form|crispy }}
     {% csrf_token %}
+    {% for field in form.visible_fields %}
+      <div class="form-group">
+        {{field.label_tag}}
+        {{field}}
+        {% if field.help_text %}
+          <small class="form-text text-muted">{{field.help_text}}</small>
+        {% endif %}
+      </div>
+      {% endfor %}
+
     <input type="hidden" name="next" value="{{ next }}">
     <input class="btn btn-default" type="submit" value="Desar">
   </form>

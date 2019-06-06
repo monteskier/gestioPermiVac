@@ -31,33 +31,68 @@ def tramit_eliminar(request, pk):
     return redirect('/tramitador/')
 
 @login_required
+def validar(request, pk, rol):
+    tramit = get_object_or_404(Tramit, pk=pk)
+    print(rol)
+    if(("responsables" in rol) and ("RRHH" not in rol)):
+        tramit.valResp = "conforme";
+        tramit.save();
+    elif("RRHH" in rol):
+        tramit.valRRHH = "conforme";
+        tramit.save();
+    elif("politics" in rol):
+        tramit.valPol = "conforme";
+        tramit.save();
+
+    return redirect ('/tramitador/assignades')
+
+@login_required
+def denegar(request, pk, rol):
+    tramit = get_object_or_404(Tramit, pk=pk)
+    if(("responsables" in rol) and ("RRHH" not in rol)):
+        tramit.valResp = "inconforme";
+        tramit.save();
+    elif("RRHH" in rol):
+        tramit.valRRHH = "inconforme";
+        tramit.save();
+    elif("politics" in rol):
+        tramit.valPol = "inconforme";
+        tramit.save();
+
+    return redirect ('/tramitador/assignades')
+
+
+@login_required
 def assignades(request):
     groups = request.user.groups.all()
-    rol = ""
+    rol = []
     l = []
+    tramits_pendents_RRHH = None
     for g in groups:
         l.append(g.name)
 
     if "responsables" in l:
-        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( valResp = "espera").exclude(finalitzat = True)
+        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( Q(valResp = "espera") | Q(valRRHH="inconforme")).exclude(finalitzat = True)
         if "RRHH" in l:
-            tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( Q(valResp = "conforme") | Q(valResp = "espera")).exclude(finalitzat = True)
-            rol = "RRHH"
-        else:
-            tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).exclude(finalitzat = True)
-            rol = "responsables"
+            tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True)
+            rol.append("RRHH")
+        rol.append("responsables")
 
 
     elif "RRHH" in l:
-        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter(valResp = "espera").exclude(finalitzat = True)
-        rol = "RRHH"
+        tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True)
+        rol.append("RRHH")
 
     elif "politics" in l:
-        tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter(valRRHH = "espera").exclude(finalitzat = True)
-        rol = 'politics'
+        tramits_pendents = Tramit.objects.all().filter(Q(valRRHH = "conforme") & Q(finalitzat = False))
+        rol.append('politics')
 
-    context = {'tramits_pendents': tramits_pendents,'rol': rol}
-    return render(request, 'tramits/assignades.html', context)
+    if(tramits_pendents_RRHH != None):
+        context = {'tramits_pendents': tramits_pendents,'rol': rol, 'tramits_pendents_RRHH':tramits_pendents_RRHH }
+        return render(request, 'tramits/assignades.html', context)
+    else:
+        context = {'tramits_pendents': tramits_pendents,'rol': rol}
+        return render(request, 'tramits/assignades.html', context)
 
 """def login(request):
     if(request.method=='POST'):
@@ -72,6 +107,15 @@ def assignades(request):
             return render(request, 'tramits/login.html', context)
     else:
         return render(request, 'tramits/login.html')"""
+
+@login_required
+def historic(request):
+    groups = request.user.groups.all()
+    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True))
+    context = {'tramits_finalitzats': tramits_finalitzats}
+    return render(request, 'tramits/historic.html', context)
+
+
 
 @login_required
 def nou_tramit(request):

@@ -7,33 +7,99 @@
   <div id="main_table">
     <table>
       <tr>
-        <th>Dates de la Solicitud i link</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Validacio Responable</th><th>Validacio RRHH</th>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Validacio Responable</th><th>Validacio RRHH</th>
         <th>Validacio Politic</th>
       </tr>
       {% for tramit in tramits_pendents %}
       <tr>
-        <td><a href="{% url 'tramit_detall' tramit.id %}">{{tramit.data_sol}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
-        <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" class="glyphicon glyphicon-remove"></a></td>
+        <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
+        <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" onclick="return confirm('Estas segur de vole eliminar el tràmit?')" class="glyphicon glyphicon-remove"></a></td>
         <td>
           {% if tramit.document %}
 
             <a href='{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
           {% else %}
-            <p>Sense documents</p>
+            <small>Sense documents</small>
           {% endif %}
         </td>
-        <td>{{tramit.valResp}}</td><td>{{tramit.valRRHH}}</td><td>{{tramit.valPol}}</td>
+        <td>
+          {% if 'responsables' in rol %}
+            <a href="{% url 'validar' tramit.id rol %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id rol %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+          {% endif %}
+          {{tramit.valResp}}
+        </td>
+        <td>
+          {% if 'RRHH' in rol %}
+            <a href="{% url 'validar' tramit.id rol %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id rol %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+          {% endif %}
+            {{tramit.valRRHH}}
+        </td>
+        <td>
+          {% if 'politics' in rol %}
+            <a href="{% url 'validar' tramit.id rol %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id rol %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}"data-rol="{{rol}}"></a>
+          {% endif %}
+            {{tramit.valPol}}
+        </td>
+
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endif %}
+
+  {% if tramits_pendents_RRHH %}
+    <h4>Tramits Pendents com a RRHH:</h4>
+    <table>
+      <tr>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Validacio Responable</th><th>Validacio RRHH</th>
+        <th>Validacio Politic</th>
+      </tr>
+      {% for tramit in tramits_pendents_RRHH %}
+      <tr>
+        <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
+        <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" onclick="return confirm('Estas segur de vole eliminar el tràmit?')" class="glyphicon glyphicon-remove"></a></td>
+        <td>
+          {% if tramit.document %}
+
+            <a href='{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
+          {% else %}
+            <small>Sense documents</small>
+          {% endif %}
+        </td>
+        <td>
+          {% if 'responsables' in rol %}
+            <a href="{% url 'validar' tramit.id rol %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id rol %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}" data-rol="{{rol}}" onclick="return confirm('Estas segur de voler denegar el tràmit?')"></a>
+          {% endif %}
+          {{tramit.valResp}}
+        </td>
+        <td>
+          {% if 'RRHH' in rol %}
+            <a href="{% url 'validar' tramit.id rol %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id rol %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"  onclick="return confirm('Estas segur de voler denegar el tràmit?')"></a>
+          {% endif %}
+            {{tramit.valRRHH}}
+        </td>
+        <td>
+          {% if 'politics' in rol %}
+            <a href="{% url 'validar' tramit.id rol %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id rol %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}"data-rol="{{rol}}"></a>
+          {% endif %}
+            {{tramit.valPol}}
+        </td>
 
       </tr>
       {% endfor %}
     </table>
     </div>
     {% else %}
-      <p>No hi han tramits pendents de tramitar...</p>
-  {% endif %}
+      <p>No hi han tramits pendentsde de tramitar...</p>
+    {% endif %}
 {% endblock %}
 
 {% block javascript %}
-
 
 {% endblock %}

@@ -47,6 +47,10 @@
   height: auto;
   padding: 5px;
 }
+.content-loader tr td {
+    white-space: nowrap;
+    width:auto;
+}
 
 ul.menu_options  {
   list-style-type: none;

@@ -1,0 +1,34 @@
+{% extends 'tramits/base.html' %}
+
+{% block content %}
+
+  {% if tramits_finalitzats %}
+  <h4>Tramits finalizats:</h4>
+  <div id="main_table">
+    <table>
+      <tr>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Document</th>
+        <th>Validacio responsable</th><th>Validacio RRHH</th><th>Validacio Politic</th>
+      </tr>
+      {% for tramit in tramits_finalitzats %}
+      <tr>
+        <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
+        <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td>
+        <td>
+          {% if tramit.document %}
+
+            <a href='{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
+          {% else %}
+            Sense documents
+          {% endif %}
+        </td>
+        <td>{{tramit.valResp}}</td><td>{{tramit.valRRHH}}</td><td>{{tramit.valPol}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    </div>
+    {% else %}
+      Encara no s'ha finalitzat cap tràmit...
+  {% endif %}
+
+{% endblock %}
