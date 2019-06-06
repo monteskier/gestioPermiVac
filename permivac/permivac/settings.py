@@ -128,3 +128,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/documents/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/documents/upload')
+
+#AQUESTA PART LA HE FET PER PODER NOTIFICAR
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ajsvcsid@gmail.com'
+EMAIL_HOST_PASSWORD = 'N0P0tsP4ss4r'
+EMAIL_USE_TLS = True

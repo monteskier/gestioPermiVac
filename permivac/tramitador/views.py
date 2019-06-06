@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-from .models import Tramit, Document
+from .models import Tramit, Document, Treballadors
 from .forms import TramitSolForm, DocumentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -12,6 +12,8 @@ from django.core.files.storage import FileSystemStorage
 import os, datetime
 from django.conf import settings
 from django.db.models import Q
+from django.core.mail import send_mail
+from django.forms.models import model_to_dict
 # Create your views here.
 
 def index(request):
@@ -42,7 +44,11 @@ def validar(request, pk, rol):
         tramit.save();
     elif("politics" in rol):
         tramit.valPol = "conforme";
+        tramit.valResp = "conforme";
         tramit.save();
+        treballador = tramit.treballador
+        if(treballador != None):
+            send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.",'ajsvcsid@gmail.com',[treballador.email,])
 
     return redirect ('/tramitador/assignades')
 
@@ -50,14 +56,24 @@ def validar(request, pk, rol):
 def denegar(request, pk, rol):
     tramit = get_object_or_404(Tramit, pk=pk)
     if(("responsables" in rol) and ("RRHH" not in rol)):
-        tramit.valResp = "inconforme";
-        tramit.save();
+        tramit.valResp = "inconforme"
+        tramit.save()
+        treballador = tramit.treballador
+        if(treballador != None):
+            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
+
     elif("RRHH" in rol):
-        tramit.valRRHH = "inconforme";
-        tramit.save();
+        tramit.valRRHH = "inconforme"
+        tramit.save()
+        treballador = tramit.treballador
+        if(treballador != None):
+            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
     elif("politics" in rol):
-        tramit.valPol = "inconforme";
-        tramit.save();
+        tramit.valPol = "inconforme"
+        tramit.save()
+        treballador = tramit.treballador
+        if(treballador != None):
+            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
 
     return redirect ('/tramitador/assignades')
 
@@ -110,8 +126,9 @@ def assignades(request):
 
 @login_required
 def historic(request):
+    today = datetime.date.today()
     groups = request.user.groups.all()
-    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True))
+    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True) &Q(creat_en__year=today.year))
     context = {'tramits_finalitzats': tramits_finalitzats}
     return render(request, 'tramits/historic.html', context)
 
@@ -125,7 +142,14 @@ def nou_tramit(request):
             post = form.save(commit=False)
             post.treballador = request.user
             post.save()
-            return redirect('tramit_detall', pk=post.pk)
+            responsables = Treballadors.objects.all().filter(Q(areas__in = request.user.areas.all()) & Q( groups__name = 'responsables'))
+            if(responsables != None):
+                email = []
+                for r in responsables:
+                    email.append(r.email)
+
+                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.treballadors.data_sol,'ajsvcsid@gmail.com',email)
+                return redirect('tramit_detall', pk=post.pk)
         else:
             return HttpResponse("Dades incorrectes, no s'ha pogut desar")
     else:
