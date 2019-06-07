@@ -16,6 +16,10 @@ from django.core.mail import send_mail
 from django.forms.models import model_to_dict
 # Create your views here.
 
+def redireccio(request):
+    response = redirect('/tramitador/')
+    return response
+
 def index(request):
     tramits_pendents = Tramit.objects.all().filter(treballador__id=request.user.id).exclude(finalitzat = True)
     context = {'tramits_pendents': tramits_pendents}
@@ -36,13 +40,13 @@ def tramit_eliminar(request, pk):
 def validar(request, pk, rol):
     tramit = get_object_or_404(Tramit, pk=pk)
     print(rol)
-    if(("responsables" in rol) and ("RRHH" not in rol)):
+    if("responsables" == rol):
         tramit.valResp = "conforme";
         tramit.save();
-    elif("RRHH" in rol):
+    elif("RRHH" == rol):
         tramit.valRRHH = "conforme";
         tramit.save();
-    elif("politics" in rol):
+    elif("politics" == rol):
         tramit.valPol = "conforme";
         tramit.valResp = "conforme";
         tramit.save();
@@ -148,7 +152,7 @@ def nou_tramit(request):
                 for r in responsables:
                     email.append(r.email)
 
-                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.treballadors.data_sol,'ajsvcsid@gmail.com',email)
+                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.data_sol+"\n Tipus:"+post.tipus,'ajsvcsid@gmail.com',email)
                 return redirect('tramit_detall', pk=post.pk)
         else:
             return HttpResponse("Dades incorrectes, no s'ha pogut desar")

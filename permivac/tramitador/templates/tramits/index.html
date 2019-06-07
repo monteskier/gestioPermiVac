@@ -4,8 +4,8 @@
 
   {% if tramits_pendents %}
   <h4>Tramits Pendents de finalitzar:</h4>
-  <div id="main_table">
-    <table>
+
+    <table class="TFtable">
       <tr>
         <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th>
         <th>Validacio responsable</th><th>Validacio RRHH</th><th>Validacio Politic</th>
@@ -27,7 +27,7 @@
       </tr>
       {% endfor %}
     </table>
-    </div>
+    
     {% else %}
       <p>No hi han tramits recents...</p>
   {% endif %}

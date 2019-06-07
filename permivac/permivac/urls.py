@@ -16,12 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
-
+from tramitador import views
 
 admin.site.site_header = "RRHH AjSVC Admin"
 admin.site.site_title = "RRHH AjSVC Portal"
 admin.site.index_title = "Benvingut al tramitador de RRHH AjSVC"
 urlpatterns = [
+    path('',views.redireccio),
     url(r'^tramitador/', include('tramitador.urls')),
     url(r'^admin/', admin.site.urls),
+    path('accounts/login/',views.redireccio),
 ]

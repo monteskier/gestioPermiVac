@@ -19,11 +19,9 @@
     <div id="heading">
       {% block heading %}
         {% if user.is_authenticated %}
-          Bevingut {{ user.username }}!
-          <p><a href="{% url 'logout' %}">logout</a></p>
+          Bevingut sr/ra {{ user.first_name }} {{ user.last_name }}
         {% else %}
-          <p>Encara no t'has autentificat: </p>
-          <a href="{% url 'login' %}">login</a>
+          <p>Encara no t'has autentificat:<a href="{% url 'login' %}">Entrar</a></p>
         {% endif %}
       {% endblock %}
     </div>
@@ -34,13 +32,18 @@
           <ul class="menu_options">
             <li><a href="{% url 'index' %}" class="active">Inici</a></li>
             <li><a href="{% url 'nou_tramit' %}"class ="glyphicon glyphicon-plus">Solicitud</a></li>
-
+            <li><a href="{% url 'logout' %}">Sortir</a></li>
+            <li><a href="accounts/password_change/">Canviar la contrasenya</a></li>
             {% if request.user|has_group:"RRHH;responsables;politics" %}
               <li><a href="{% url 'assignades' %}">Assignades</a></li>
             {% endif %}
 
             <li><a href="{% url 'historic' %}">Historic</a></li>
-            <li><a href="/infor">Informacio sobre el Tramit</a></li>
+            <li><a target="_blank" href="{% static 'documentacio/manual.pdf' %}">Informacio sobre el Tramit</a></li>
+
+            <li class="menu_options_dreta"><a href="{% url 'logout' %}">Sortir</a></li>
+            <li class="menu_options_dreta"><a href="accounts/password_change/">Canviar la contrasenya</a></li>
+
           </ul>
         </div>
         {% block content %}

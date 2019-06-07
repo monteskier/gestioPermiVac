@@ -2,6 +2,8 @@
   display:flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-content:center;
+  align-items:center;
   width: 90%;
   height: auto;
   margin-left: auto;
@@ -21,8 +23,6 @@
   margin-right: auto;
   height: auto;
   justify-content: center;
-  /*border-style: groove;
-  border-color: blue;*/
 }
 #login_block{
   flex-direction: column;
@@ -30,22 +30,36 @@
   display:flex;
   width: 300px;
   height: auto;
-  justify-content: center;
   border-width: thin;
   border-style: solid;
 }
 #options_block{
-  display: block;
+  /*border-style: groove;
+  display: flex;
   flex-direction:row;
   width: 100%;
   height: auto;
-  /*border-style: groove;
   border-color: green;*/
 }
-#main_table table{
-  width: 90%;
+
+
+.TFtable{
+  width: 100%;
   height: auto;
   padding: 5px;
+}
+.TFtable td{
+  padding:7px;
+  border:border#4ef495 1px solid;
+}
+.TFtable tr{
+  background:#b8f3d1;
+}
+.TFtable tr:nth-child(odd){
+  background:#b8f3d1;
+}
+.TFtable tr:nth-child(even){
+  background:#daf4e5;
 }
 .content-loader tr td {
     white-space: nowrap;
@@ -63,7 +77,9 @@ ul.menu_options  {
 ul.menu_options li {
   float: left;
 }
-
+ul.menu_options li.menu_options_dreta{
+  float:right;
+}
 ul.menu_options li a {
   display: block;
   color: white;
