@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from .Calendari import Cal
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -36,6 +37,7 @@ def tramit_eliminar(request, pk):
     tramit.delete()
     return redirect('/tramitador/')
 
+
 @login_required
 def validar(request, pk, rol):
     tramit = get_object_or_404(Tramit, pk=pk)
@@ -53,6 +55,11 @@ def validar(request, pk, rol):
         treballador = tramit.treballador
         if(treballador != None):
             send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.",'ajsvcsid@gmail.com',[treballador.email,])
+            #NOVA LINEA PER RESTAR ELS DIES DEL CALENDARI:
+            if(Cal.get(treballador.id)!=False):
+                print("Existeix un calendari en aquest treballador")
+            else:
+                print("No existeix cap Calendari de aquest any al treballador")
 
     return redirect ('/tramitador/assignades')
 

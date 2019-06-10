@@ -6,6 +6,12 @@ import datetime
 # Create your models here.
 from django.contrib.auth.models import AbstractUser
 
+def year_choices():
+    return [(r,r) for r in range(1984, datetime.date.today().year+2)]
+
+def current_year():
+    return datetime.date.today().year
+
 class Area(models.Model):
     nom = models.CharField(max_length=100)
     def __str__(self):
@@ -92,3 +98,14 @@ class Tramit(models.Model):
 
     def __str__(self):
         return self.treballador.usuari
+
+class Calendari(models.Model):
+    any = models.IntegerField(('any'),choices=year_choices(), default=current_year())
+    vacances = models.IntegerField(default=22, verbose_name="Vacances disponibles")
+    perm_precep = models.IntegerField(default=0, verbose_name="Permissos preceptius fets:")
+    perm_no_precep = models.IntegerField(default=0, verbose_name="Permissos no preceptius fets:")
+    asum_p = models.IntegerField(default=6,verbose_name="Assumptes perosnals disponibles:")
+    treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.any)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Treballadors, Tramit, Document, Area
+from .models import Treballadors, Tramit, Document, Area, Calendari
 
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
@@ -52,3 +52,4 @@ class DocumentAdmin(admin.ModelAdmin):
 admin.site.register(Tramit, TramitAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Area)
+admin.site.register(Calendari)

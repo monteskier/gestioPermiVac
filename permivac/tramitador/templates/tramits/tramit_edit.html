@@ -14,7 +14,7 @@
     <div id="seccio">
       <label for="opcio">Opcions:</label>
       <div class="radio">
-        <label><input type="radio" name="opcio" value="interval">Interval de dates</label>
+        <label><input type="radio" name="opcio" value="interval" checked>Interval de dates</label>
       </div>
       <div class="radio">
         <label><input type="radio" name="opcio" value="single">Dies independents</label>
@@ -47,7 +47,7 @@
     $(document).ready(function(){
       $("#display1").datepicker();
       $("#display2").datepicker();
-      $("#id_data_sol").prop('disabled', true);
+      /*$("#id_data_sol").prop('disabled', true);*/
 
       $('input[type=radio][name=opcio]').change(function(){
         if(this.value=="interval"){
