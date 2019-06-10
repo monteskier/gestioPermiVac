@@ -41,7 +41,18 @@
   height: auto;
   border-color: green;*/
 }
-
+#calucladora{
+  display:flex;
+  justify-content: center;
+  flex-direction:row;
+  border-style: solid;
+  border-color: blue;
+}#calucladora #seccio{
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  border-color: red;
+}
 
 .TFtable{
   width: 100%;

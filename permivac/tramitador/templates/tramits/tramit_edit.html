@@ -5,6 +5,26 @@
 <div id="main_table">
 
   <h4>Nova Sol·licitud de Permissos i Vacances</h4>
+  <div id="calculadora">
+    <h4>Calcula les dades de sol·icitud</h4>
+    <div class="seccio">
+      Del:<input type="text" name="display1" id="display1"/>Al:
+      <input type="text" name="display2" id="display2" />
+    </div>
+    <div id="seccio">
+      <label for="opcio">Opcions:</label>
+      <div class="radio">
+        <label><input type="radio" name="opcio" value="interval">Interval de dates</label>
+      </div>
+      <div class="radio">
+        <label><input type="radio" name="opcio" value="single">Dies independents</label>
+      </div>
+    </div>
+    <div id="seccio">
+      <button type="button" class="btn" id="add_btn">Afeixir</button>
+      <button type="button" class="btn btn-danger" id="reset_btn">Reiniciar</button>
+    </div>
+  </div>
   <form method="POST" class="post-form">
     {% csrf_token %}
     {% for field in form.visible_fields %}
@@ -18,7 +38,53 @@
       {% endfor %}
 
     <input type="hidden" name="next" value="{{ next }}">
-    <input class="btn btn-default" type="submit" value="Desar">
+    <input class="btn btn-success" type="submit" value="Desar">
   </form>
 </div>
+{% endblock %}
+{% block javascript %}
+  <script>
+    $(document).ready(function(){
+      $("#display1").datepicker();
+      $("#display2").datepicker();
+      $("#id_data_sol").prop('disabled', true);
+
+      $('input[type=radio][name=opcio]').change(function(){
+        if(this.value=="interval"){
+          $("#display1").prop("disabled", false);
+          $("#display2").prop("disabled", false);
+          opcio = "interval";
+        }else if(this.value == "single"){
+          $("#display2").val(null);
+          $("#display2").prop("disabled", true);
+        }
+
+      });
+
+      $("#add_btn").click(function(e){
+
+        if( $("#display1").val().length === 0 ){
+          alert("Has de introduir minim una data");
+        }else if( ($('input[type=radio][name=opcio]:checked').val()=="single") ){
+          console.log("opcio single marcada");
+          var valor = $("#id_data_sol").val();
+          valor = valor + $("#display1").val();
+          $("#id_data_sol").val(valor+";");
+        }else if( ($('input[type=radio][name=opcio]:checked').val()=="interval") ){
+          console.log("opcio interval marcada");
+          var valor = $("#id_data_sol").val();
+          valor = valor + $("#display1").val() + " - " + $("#display2").val();
+          console.log(valor);
+          $("#id_data_sol").val(valor+"; ");
+        }else{
+          console.log("esto no chuta");
+        }
+      });
+      $("#reset_btn").click(function(e){
+        $("#display1").val(null);
+        $("#display2").val(null);
+        $("#id_data_sol").val(null);
+      });
+    });
+  </script>
 {% endblock %}
