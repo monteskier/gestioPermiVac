@@ -49,7 +49,11 @@ class TramitAdmin(admin.ModelAdmin):
 class DocumentAdmin(admin.ModelAdmin):
     list_display=('descripcio','document')
 
+class CalendariAdmin(admin.ModelAdmin):
+    list_display = ('any','treballador','vacances','perm_precep','perm_no_precep', 'asum_p','asum_p_dies')
+
+
 admin.site.register(Tramit, TramitAdmin)
 admin.site.register(Document, DocumentAdmin)
 admin.site.register(Area)
-admin.site.register(Calendari)
+admin.site.register(Calendari, CalendariAdmin)

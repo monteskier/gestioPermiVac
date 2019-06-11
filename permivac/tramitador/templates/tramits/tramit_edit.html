@@ -45,8 +45,8 @@
 {% block javascript %}
   <script>
     $(document).ready(function(){
-      $("#display1").datepicker();
-      $("#display2").datepicker();
+      $("#display1").datepicker({ dateFormat: 'yy-mm-dd' });
+      $("#display2").datepicker({ dateFormat: 'yy-mm-dd' });
       /*$("#id_data_sol").prop('disabled', true);*/
 
       $('input[type=radio][name=opcio]').change(function(){
@@ -73,9 +73,9 @@
         }else if( ($('input[type=radio][name=opcio]:checked').val()=="interval") ){
           console.log("opcio interval marcada");
           var valor = $("#id_data_sol").val();
-          valor = valor + $("#display1").val() + " - " + $("#display2").val();
+          valor = valor + $("#display1").val() + "/" + $("#display2").val();
           console.log(valor);
-          $("#id_data_sol").val(valor+"; ");
+          $("#id_data_sol").val(valor+";");
         }else{
           console.log("esto no chuta");
         }

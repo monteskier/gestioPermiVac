@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-from .models import Tramit, Document, Treballadors
+from .models import Tramit, Document, Treballadors, Calendari
 from .forms import TramitSolForm, DocumentForm
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -54,13 +54,16 @@ def validar(request, pk, rol):
         tramit.save();
         treballador = tramit.treballador
         if(treballador != None):
-            send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.",'ajsvcsid@gmail.com',[treballador.email,])
+            #send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.",'ajsvcsid@gmail.com',[treballador.email,])
             #NOVA LINEA PER RESTAR ELS DIES DEL CALENDARI:
-            if(Cal.get(treballador.id)!=False):
+            cal = Cal()
+            if(cal.exist(treballador.id)!=False):
                 print("Existeix un calendari en aquest treballador")
+                dies = cal.recompte(tramit.data_sol)
+                cal.gravar(treballador.id,tramit.tipus, dies, tramit.data_sol)
+
             else:
                 print("No existeix cap Calendari de aquest any al treballador")
-
     return redirect ('/tramitador/assignades')
 
 @login_required
@@ -140,7 +143,8 @@ def historic(request):
     today = datetime.date.today()
     groups = request.user.groups.all()
     tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True) &Q(creat_en__year=today.year))
-    context = {'tramits_finalitzats': tramits_finalitzats}
+    calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
+    context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
     return render(request, 'tramits/historic.html', context)
 
 

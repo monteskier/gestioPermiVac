@@ -102,9 +102,13 @@ class Tramit(models.Model):
 class Calendari(models.Model):
     any = models.IntegerField(('any'),choices=year_choices(), default=current_year())
     vacances = models.IntegerField(default=22, verbose_name="Vacances disponibles")
+    vacances_dies = models.CharField(max_length=500, blank=True)
     perm_precep = models.IntegerField(default=0, verbose_name="Permissos preceptius fets:")
+    perm_precep_dies = models.CharField(max_length=500, blank=True)
     perm_no_precep = models.IntegerField(default=0, verbose_name="Permissos no preceptius fets:")
+    perm_no_precep_dies = models.CharField(max_length=500, blank=True)
     asum_p = models.IntegerField(default=6,verbose_name="Assumptes perosnals disponibles:")
+    asum_p_dies = models.CharField(max_length=500, blank=True)
     treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
 
     def __str__(self):

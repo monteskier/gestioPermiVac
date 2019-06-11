@@ -29,5 +29,23 @@
     {% else %}
       Encara no s'ha finalitzat cap tràmit...
   {% endif %}
-
+  {% if calendari %}
+  <h4>Informació en dies, sobre el teu calendari any: {{calendari.any}}</h4>
+    <table class="TFtable">
+      <tr>
+        <th>Vacances restants</th>
+        <th>Permissos preceptius fets</th>
+        <th>Permissos no preceptius fets</th>
+        <th>Assumptes personals restants</th>
+      </tr>
+      <tr>
+        <td>{{calendari.vacances}}</td>
+        <td>{{calendari.perm_precep}}</td>
+        <td>{{calendari.perm_no_precep}}</td>
+        <td>{{calendari.asum_p}}</td>
+      </tr>
+    </table>
+  {% else %}
+    <p>Encara no tens calendari d'aquest any confeccionat.</p>
+  {% endif %}
 {% endblock %}
