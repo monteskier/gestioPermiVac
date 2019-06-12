@@ -112,3 +112,7 @@ a, i {cursor: pointer;
 .amagat{
   display:none;
 }
+.ui-datepicker td.holiday a, .ui-datepicker td.holiday a:hover {
+    background: none #FFEBAF;
+    border: 1px solid #BF5A0C;
+  }

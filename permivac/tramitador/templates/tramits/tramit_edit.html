@@ -45,8 +45,8 @@
 {% block javascript %}
   <script>
     $(document).ready(function(){
-      $("#display1").datepicker({ dateFormat: 'yy-mm-dd' });
-      $("#display2").datepicker({ dateFormat: 'yy-mm-dd' });
+      $("#display1").datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay:setHoliDays });
+      $("#display2").datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay:setHoliDays });
       /*$("#id_data_sol").prop('disabled', true);*/
 
       $('input[type=radio][name=opcio]').change(function(){
@@ -85,6 +85,23 @@
         $("#display2").val(null);
         $("#id_data_sol").val(null);
       });
+
+    function setHoliDays(date) {
+        for (i = 0; i < holiDays.length; i++) {
+          if (date.getFullYear() == holiDays[i][0]
+             && date.getMonth() == holiDays[i][1] - 1
+               && date.getDate() == holiDays[i][2]) {
+             return [true, 'holiday', holiDays[i][3]];
+          }
+        }
+       return [true, ''];
+    }
+    /*Codi Per editar els dies festius del datepicker*/
+    var holiDays =[[2019,01,01,'Any nou'],[2019,01,22,'Festiu'],[2019,19,04,'Festiu'],
+    [2019,22,04,'Festiu'],[2019,05,01,'Festiu'],[2019,06,24,'Festiu'],[2019,07,15,'Festiu'],
+    [2019,08,15,'Festiu'],[2019,09,11,'Festiu'],[2019,10,12,'Festiu'],[2019,11,01,'Festiu'],
+    [2019,12,06,'Festiu'],[2019,12,25,'Festiu'],[2019,12,26,'Festiu']];
+
     });
   </script>
 {% endblock %}
