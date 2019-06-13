@@ -128,9 +128,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/documents/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'tramitador/static/documents/upload')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),  # Here you tell django to look for a folder named 'assets'
-]
 
 #AQUESTA PART LA HE FET PER PODER NOTIFICAR
 EMAIL_HOST = 'smtp.gmail.com'
