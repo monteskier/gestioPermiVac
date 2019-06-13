@@ -18,7 +18,7 @@ from django.forms.models import model_to_dict
 # Create your views here.
 
 def redireccio(request):
-    response = redirect('/tramitador/')
+    response = redirect('/Permivac/tramitador/')
     return response
 
 def index(request):
