@@ -23,7 +23,7 @@ admin.site.site_title = "RRHH AjSVC Portal"
 admin.site.index_title = "Benvingut al tramitador de RRHH AjSVC"
 urlpatterns = [
     path('',views.redireccio),
-    url(r'^tramitador/', include('tramitador.urls')),
-    url(r'^admin/', admin.site.urls),
+    url(r'^Permivac/tramitador/', include('tramitador.urls')),
+    url(r'^Permivac/admin/', admin.site.urls),
     path('accounts/login/',views.redireccio),
 ]
