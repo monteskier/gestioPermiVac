@@ -64,7 +64,7 @@ def validar(request, pk, rol):
 
             else:
                 print("No existeix cap Calendari de aquest any al treballador")
-    return redirect ('permivac/tramitador/assignades')
+    return redirect ('/tramitador/assignades')
 
 @login_required
 def denegar(request, pk, rol):
@@ -122,7 +122,7 @@ def assignades(request):
         return render(request, 'tramits/assignades.html', context)
     else:
         context = {'tramits_pendents': tramits_pendents,'rol': rol}
-        return render(request, 'permivac/tramits/assignades.html', context)
+        return render(request, 'tramits/assignades.html', context)
 
 """def login(request):
     if(request.method=='POST'):
@@ -143,9 +143,15 @@ def historic(request):
     today = datetime.date.today()
     groups = request.user.groups.all()
     tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True) &Q(creat_en__year=today.year))
-    calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
-    context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
-    return render(request, 'tramits/historic.html', context)
+    cal = Cal();
+    if(cal.exist(request.user.id)!=False):
+    	calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
+	context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
+	return render(request, 'tramits/historic.html', context)
+
+    else:
+    	context = {'tramits_finalitzats': tramits_finalitzats}
+    	return render(request, 'tramits/historic.html', context)
 
 
 
