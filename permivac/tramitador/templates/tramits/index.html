@@ -17,7 +17,7 @@
         <td>
           {% if tramit.document %}
 
-            <a href='{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
+            <a href='/static/documents/upload/{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
           {% else %}
             <input type="file"  data-tramit="{{tramit.pk}}" />
             <input type="button" class="glyphicon glyphicon-open-file" value="Enviar" id="pujar"/>
@@ -27,7 +27,7 @@
       </tr>
       {% endfor %}
     </table>
-    
+
     {% else %}
       <p>No hi han tramits recents...</p>
   {% endif %}

@@ -13,6 +13,6 @@
     <p>Validacio del RRHH: {{tramit.valRRHH}}</p>
     <p>Validacio del Politic:{{tramit.valPol}}</p>
     <p>Missatge Responsable:{{tramit.missatge_responsable}}</p>
-    <p>{% if tramit.document %}<a href="{{tramit.document.document }}" class="glyphicon glyphicon-save-file">{{tramit.document.descripcio}}</a>{% else %}Sense document <i class="glyphicon glyphicon-open-file" id="enviar_doc" data-tramit="{{tramit.pk}}"></i>{% endif %}</p>
+    <p>{% if tramit.document %}<a href="/static/documents/upload/{{tramit.document.document }}" class="glyphicon glyphicon-save-file">{{tramit.document.descripcio}}</a>{% else %}Sense document <i class="glyphicon glyphicon-open-file" id="enviar_doc" data-tramit="{{tramit.pk}}"></i>{% endif %}</p>
   </div>
 {% endblock %}
