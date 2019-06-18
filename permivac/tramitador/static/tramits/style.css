@@ -1,7 +1,7 @@
 #heading{
   display:flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   align-content:center;
   align-items:center;
   width: 90%;
