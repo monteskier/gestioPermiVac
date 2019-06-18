@@ -35,7 +35,7 @@ def tramit_detall(request, pk):
 def tramit_eliminar(request, pk):
     tramit = get_object_or_404(Tramit, pk=pk)
     tramit.delete()
-    return redirect('permivac/tramitador/')
+    return redirect('/permivac/tramitador/')
 
 
 @login_required
@@ -54,7 +54,7 @@ def validar(request, pk, rol):
         tramit.save();
         treballador = tramit.treballador
         if(treballador != None):
-            #send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.",'ajsvcsid@gmail.com',[treballador.email,])
+            send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.",'ajsvcsid@gmail.com',[treballador.email,])
             #NOVA LINEA PER RESTAR ELS DIES DEL CALENDARI:
             cal = Cal()
             if(cal.exist(treballador.id)!=False):
