@@ -64,7 +64,7 @@ def validar(request, pk, rol):
 
             else:
                 print("No existeix cap Calendari de aquest any al treballador")
-    return redirect ('assignades/')
+    return redirect ('permivac/tramitador/assignades')
 
 @login_required
 def denegar(request, pk, rol):
@@ -89,7 +89,7 @@ def denegar(request, pk, rol):
         if(treballador != None):
             send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
 
-    return redirect ('assignades/')
+    return redirect ('permivac/tramitador/assignades')
 
 
 @login_required
