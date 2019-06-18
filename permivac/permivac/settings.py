@@ -55,8 +55,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'permivac.urls'
-LOGIN_REDIRECT_URL = '/tramitador/'
-LOGOUT_REDIRECT_URL = '/tramitador/'
+LOGIN_REDIRECT_URL = '/permivac/tramitador/'
+LOGOUT_REDIRECT_URL = '/permivac/tramitador/'
 AUTH_USER_MODEL = "tramitador.Treballadors"
 
 TEMPLATES = [

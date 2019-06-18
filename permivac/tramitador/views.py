@@ -18,7 +18,7 @@ from django.forms.models import model_to_dict
 # Create your views here.
 
 def redireccio(request):
-    response = redirect('/Permivac/tramitador/')
+    response = redirect('permivac/tramitador/')
     return response
 
 def index(request):
@@ -35,7 +35,7 @@ def tramit_detall(request, pk):
 def tramit_eliminar(request, pk):
     tramit = get_object_or_404(Tramit, pk=pk)
     tramit.delete()
-    return redirect('/tramitador/')
+    return redirect('permivac/tramitador/')
 
 
 @login_required
@@ -64,7 +64,7 @@ def validar(request, pk, rol):
 
             else:
                 print("No existeix cap Calendari de aquest any al treballador")
-    return redirect ('/tramitador/assignades')
+    return redirect ('permivac/tramitador/assignades')
 
 @login_required
 def denegar(request, pk, rol):
@@ -89,7 +89,7 @@ def denegar(request, pk, rol):
         if(treballador != None):
             send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
 
-    return redirect ('/tramitador/assignades')
+    return redirect ('permivac/tramitador/assignades')
 
 
 @login_required
@@ -122,7 +122,7 @@ def assignades(request):
         return render(request, 'tramits/assignades.html', context)
     else:
         context = {'tramits_pendents': tramits_pendents,'rol': rol}
-        return render(request, 'tramits/assignades.html', context)
+        return render(request, 'permivac/tramits/assignades.html', context)
 
 """def login(request):
     if(request.method=='POST'):
