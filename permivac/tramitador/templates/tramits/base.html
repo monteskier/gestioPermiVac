@@ -22,7 +22,7 @@
         {% if user.is_authenticated %}
           Bevingut sr/ra {{ user.first_name }} {{ user.last_name }}
         {% else %}
-          <p>Encara no t'has autentificat:<a href="{% url 'login' %}">Entrar</a></p>
+          <p>Encara no t'has autentificat:<a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Entrar</button></a></p>
         {% endif %}
       {% endblock %}
     </div>
