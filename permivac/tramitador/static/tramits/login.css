@@ -1,0 +1,19 @@
+#main_block{
+  margin-top: 50px;
+  display:flex;
+  flex-direction:row;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  justify-content: center;
+}
+#login_block{
+  flex-direction: column;
+  padding:5px;
+  display:flex;
+  width: 300px;
+  height: auto;
+  border-width: thin;
+  border-style: solid;
+}
