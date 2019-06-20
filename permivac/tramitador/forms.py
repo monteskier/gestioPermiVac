@@ -19,7 +19,7 @@ class TramitSolForm(forms.ModelForm): #Classe per el formulari de nou tramit, se
         model = Tramit
         fields = ('data_sol','tipus', 'missatge_usuari')
         widgets = {
-            'data_sol': forms.TextInput(attrs = {'size':100}),
+            'data_sol': forms.HiddenInput(),
             'missatge_usuari':forms.Textarea(attrs={'rows':4, 'cols':150}),
             }
         labels = {
@@ -30,7 +30,6 @@ class TramitSolForm(forms.ModelForm): #Classe per el formulari de nou tramit, se
         help_text = {
             'data_sol': ("Interval de dates amb guións '-', per dies no consecutios emprar ',' Exemple:01/01/2019 - 05/01/2019, 07/01/2019" ),
         }
-        widgets = {'data_sol': forms.HiddenInput()}
 
 class DocumentForm(forms.ModelForm):
     class Meta:
