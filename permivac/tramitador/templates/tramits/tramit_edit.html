@@ -23,6 +23,7 @@
     <div id="seccio">
       <button type="button" class="btn" id="add_btn">Afeixir</button>
       <button type="button" class="btn btn-danger" id="reset_btn">Reiniciar</button>
+      <input type="text" name="dates_shadow" id="dates_shadow" disabled="disabled" size="100" value="">
     </div>
   </div>
   <form method="POST" class="post-form">
@@ -35,6 +36,10 @@
           <small class="form-text text-muted">{{field.help_text}}</small>
         {% endif %}
       </div>
+      {% endfor %}
+      {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field.errors }}
+        {{ hidden_field }}
       {% endfor %}
 
     <input type="hidden" name="next" value="{{ next }}">
@@ -66,24 +71,24 @@
         if( $("#display1").val().length === 0 ){
           alert("Has de introduir minim una data");
         }else if( ($('input[type=radio][name=opcio]:checked').val()=="single") ){
-          console.log("opcio single marcada");
           var valor = $("#id_data_sol").val();
           valor = valor + $("#display1").val();
           $("#id_data_sol").val(valor+";");
+          $("#dates_shadow").val(valor+";");
         }else if( ($('input[type=radio][name=opcio]:checked').val()=="interval") ){
-          console.log("opcio interval marcada");
           var valor = $("#id_data_sol").val();
           valor = valor + $("#display1").val() + "/" + $("#display2").val();
-          console.log(valor);
           $("#id_data_sol").val(valor+";");
+          $("#dates_shadow").val(valor+";");
         }else{
-          console.log("esto no chuta");
+
         }
       });
       $("#reset_btn").click(function(e){
         $("#display1").val(null);
         $("#display2").val(null);
         $("#id_data_sol").val(null);
+        $("#dates_shadow").val(null);
       });
 
     function setHoliDays(date) {
