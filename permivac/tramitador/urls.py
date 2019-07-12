@@ -12,6 +12,7 @@ urlpatterns = [
     path('tramit/<int:pk>/', views.tramit_detall, name='tramit_detall'),
     path('tramit_eliminar/<int:pk>/', views.tramit_eliminar, name='tramit_eliminar'),
     path('upload_document/', views.upload_document, name='pujar_document'),
+    path('delete_document/', views.delete_document, name='eliminar_document'),
     path('assignades/',views.assignades, name="assignades"),
     path('validar/<int:pk>/<str:rol>', views.validar, name='validar'),
     path('denegar/<int:pk>/<str:rol>', views.denegar, name='denegar'),

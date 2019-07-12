@@ -198,3 +198,17 @@ def upload_document(request):
             response_data['result'] = 'ERROR'
             response_data['message'] = "Document no s'ha dessat correctament al Tramit corresponent."
             return JsonResponse(response_data)
+
+def delete_document(request):
+    if request.method == 'POST' and request.POST.get('pk') != 0:
+        document = get_object_or_404(Document, pk=request.POST.get('pk'))
+        document.delete()
+        response_data = {}
+        response_data['result'] = 'OK'
+        response_data['message'] = "Document eliminat correctament al Tramit corresponent."
+        return JsonResponse(response_data)
+    else:
+        response_data = {}
+        response_data['result'] = 'Error'
+        response_data['message'] = "No s'ha pogut eliminar el document."
+        return JsonResponse(response_data)

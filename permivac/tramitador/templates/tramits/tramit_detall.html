@@ -13,6 +13,33 @@
     <p>Validacio del RRHH: {{tramit.valRRHH}}</p>
     <p>Validacio del Politic:{{tramit.valPol}}</p>
     <p>Missatge Responsable:{{tramit.missatge_responsable}}</p>
-    <p>{% if tramit.document %}<a href="/static/documents/upload/{{tramit.document.document }}" class="glyphicon glyphicon-save-file">{{tramit.document.descripcio}}</a>{% else %}Sense document <i class="glyphicon glyphicon-open-file" id="enviar_doc" data-tramit="{{tramit.pk}}"></i>{% endif %}</p>
+    <p>
+      {% if tramit.document %}
+        <a href="/static/documents/upload/{{tramit.document.document }}" class="glyphicon glyphicon-save-file">{{tramit.document.descripcio}}</a>
+        <button class="glyphicon glyphicon-remove btn btn-danger" id="document">
+      {% else %}
+        Sense document<i class="glyphicon glyphicon-open-file" id="enviar_doc" data-tramit="{{tramit.pk}}"></i>{% endif %}</p>
   </div>
 {% endblock %}
+{% block javascript %}
+
+<script>
+  $(document).ready(function(){
+    var token = '{{csrf_token}}';
+    $("#document").click(function(){
+      $.ajax({
+        headers: { "X-CSRFToken": token },
+        url: "{% url 'eliminar_document' %}",
+        type: "POST",
+        data: {'pk':{{tramit.document.id}} },
+        dataType: 'json',
+        success: function (result) {
+         console.log("Result :"+result.result+", MSG:"+result.message);
+         alert(result.message);
+         location.reload();
+        }
+      });
+    });
+  });
+</script>
+{%  endblock %}
