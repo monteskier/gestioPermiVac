@@ -166,7 +166,7 @@ def nou_tramit(request):
                 for r in responsables:
                     email.append(r.email)
 
-                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.data_sol+"\n Tipus:"+post.tipus,'ajsvcsid@gmail.com',email)
+                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.data_sol+"\n Tipus:"+post.tipus+'\n Comentaris:'+post.missatge_usuari,'ajsvcsid@gmail.com',email)
                 return redirect('tramit_detall', pk=post.pk)
         else:
             return HttpResponse("Dades incorrectes, no s'ha pogut desar")

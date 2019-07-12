@@ -81,7 +81,7 @@ class Tramit(models.Model):
     valPol = models.CharField(max_length=20, choices=validacio, default='espera')
 
     """En cas de voler explicar el motiu"""
-    missatge_usuari = models.CharField(max_length=2000, null = True, blank=True)
+    missatge_usuari = models.CharField(max_length=2000, null = True)
     missatge_responsable = models.CharField(max_length=2000, null = True, blank=True)
 
     """Millores per el admin site"""

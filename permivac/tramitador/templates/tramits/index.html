@@ -17,10 +17,10 @@
         <td>
           {% if tramit.document %}
 
-            <a href='/static/documents/upload/{{ tramit.document.document.url }}' class="glyphicon glyphicon-save-file"></a>
+            <a href='/static/documents/upload/{{tramit.document.document }}' class="glyphicon glyphicon-save-file"></a>
           {% else %}
             <input type="file"  data-tramit="{{tramit.pk}}" />
-            <input type="button" class="glyphicon glyphicon-open-file" value="Enviar" id="pujar"/>
+            <input type="button" class="glyphicon glyphicon-open-file" value="Enviar" name="pujar"/>
           {% endif %}
         </td>
         <td>{{tramit.valResp}}</td><td>{{tramit.valRRHH}}</td><td>{{tramit.valPol}}</td>
@@ -36,7 +36,7 @@
 {% block javascript %}
 <script>
   $(document).ready(function(){
-    $("#pujar").click(function(){
+    $("input[name=pujar]").click(function(){
       $doc = $(this).prev();
       console.log($doc.val()+"pk="+$doc.data('tramit'));
       if($doc.prop('files').length > 0){
