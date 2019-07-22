@@ -53,6 +53,24 @@
       $("#display1").datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay:setHoliDays });
       $("#display2").datepicker({ dateFormat: 'yy-mm-dd', beforeShowDay:setHoliDays });
       /*$("#id_data_sol").prop('disabled', true);*/
+      $.datepicker.regional['es'] = {
+      closeText: 'Tancar',
+      prevText: '<Ant',
+      nextText: 'Sig>',
+      currentText: 'Avui',
+      monthNames: ['Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny', 'Juliol', 'Agost', 'Septembre', 'Octubre', 'Novembre', 'Decembre'],
+      monthNamesShort: ['Gen', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dec'],
+      dayNames: ['Diumenge', 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte'],
+      dayNamesShort: ['Diu', 'Dill', 'Dima', 'Dime', 'Dijo', 'Dive', 'Disb'],
+      dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sá'],
+      weekHeader: 'Sm',
+      dateFormat: 'yy-mm-dd',
+      firstDay: 1,
+      isRTL: false,
+      showMonthAfterYear: false,
+      yearSuffix: ''
+  };
+  $.datepicker.setDefaults($.datepicker.regional['es']);
 
       $('input[type=radio][name=opcio]').change(function(){
         if(this.value=="interval"){
