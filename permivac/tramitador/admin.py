@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import Treballadors, Tramit, Document, Area, Calendari
-
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 
@@ -35,10 +34,11 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(Treballadors, CustomUserAdmin)
 
-"""admin.site.register(Treballadors, TreballadorsAdmin)"""
+"""Es cra una nova classe per fer la cerca autocompletada dels Tramits"""
 
 class TramitAdmin(admin.ModelAdmin):
     list_display = ('creat_en','get_treballador_nom','get_treballador_cognoms','data_sol','tipus','was_published_recently','finalitzat')
+    search_fields = ['treballador__last_name','treballador__first_name',]
     def get_treballador_nom(self, obj):
         return obj.treballador.first_name
 
