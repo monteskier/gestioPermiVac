@@ -30,7 +30,7 @@ def index(request):
 def tramit_detall(request, pk):
     tramit = get_object_or_404(Tramit, pk=pk)
     return render(request, 'tramits/tramit_detall.html', {'tramit': tramit})
-
+    
 @login_required
 def tramit_eliminar(request, pk):
     tramit = get_object_or_404(Tramit, pk=pk)

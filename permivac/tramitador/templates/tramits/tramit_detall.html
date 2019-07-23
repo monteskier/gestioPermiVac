@@ -18,7 +18,11 @@
         <a href="/static/documents/upload/{{tramit.document.document }}" class="glyphicon glyphicon-save-file">{{tramit.document.descripcio}}</a>
         <button class="glyphicon glyphicon-remove btn btn-danger" id="document">
       {% else %}
-        Sense document<i class="glyphicon glyphicon-open-file" id="enviar_doc" data-tramit="{{tramit.pk}}"></i>{% endif %}</p>
+        Sense document<i class="glyphicon glyphicon-open-file" id="enviar_doc" data-tramit="{{tramit.pk}}"></i>
+        <input type="file"  data-tramit="{{tramit.pk}}" />
+        <input type="button" class="glyphicon glyphicon-open-file" value="Enviar" name="pujar"/>
+      {% endif %}
+    </p>
   </div>
 {% endblock %}
 {% block javascript %}
@@ -26,7 +30,34 @@
 <script>
   $(document).ready(function(){
     var token = '{{csrf_token}}';
+    $("input[name=pujar]").click(function(){
+      $doc = $(this).prev();
+      console.log($doc.val()+"pk="+$doc.data('tramit'));
+      if($doc.prop('files').length > 0){
+        var token = '{{csrf_token}}';
+        $formdata = new FormData();
+        $docu = $doc.prop('files')[0];
+        $pk = $doc.data('tramit');
+        $formdata.append("document", $docu);
+        $formdata.append("pk",$pk);
+        console.log($formdata);
+        $.ajax({
+          headers: { "X-CSRFToken": token },
+          url: "{% url 'pujar_document' %}",
+          type: "POST",
+          data: $formdata,
+          processData: false,
+          contentType: false,
+          success: function (result) {
+           console.log("Result :"+result.result+", MSG:"+result.message);
+           alert(result.message);
+           location.reload();
+          }
+        });
+      }
+    });
     $("#document").click(function(){
+      {% if tramit.document %}
       $.ajax({
         headers: { "X-CSRFToken": token },
         url: "{% url 'eliminar_document' %}",
@@ -39,7 +70,9 @@
          location.reload();
         }
       });
+      {% endif %}
     });
+
   });
 </script>
 {%  endblock %}
