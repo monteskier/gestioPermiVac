@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{% static 'tramits/style.css' %}">
+    <link rel="stylesheet" href="{% static 'tramits/jquery.bootstrap.year.calendar.min.css' %}">
 
   </head>
   <body>
@@ -39,6 +40,7 @@
 
             <li><a href="{% url 'historic' %}">Historic</a></li>
             <li><a target="_blank" href="{% static 'documentacio/manual.pdf' %}">Informacio sobre el Tramit</a></li>
+            <li><a target="_blank" href="{% url 'calendari' %}">Calendari</a></li>
 
             <li class="menu_options_dreta"><a href="{% url 'logout' %}">Sortir</a></li>
             <li class="menu_options_dreta"><a href="/permivac/tramitador/accounts/password_change/">Canviar la contrasenya</a></li>
@@ -49,6 +51,7 @@
         {% endblock %}
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
+        <script src="{% static 'js/jquery.bootstrap.year.calendar.min.js' %}"></script>
         <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^nou_tramit/',views.nou_tramit, name='nou_tramit'),
     url(r'^historic/',views.historic, name='historic'),
+    url(r'^calendari/',views.calendari, name='calendari'),
     path('tramit/<int:pk>/', views.tramit_detall, name='tramit_detall'),
     path('tramit_eliminar/<int:pk>/', views.tramit_eliminar, name='tramit_eliminar'),
     path('upload_document/', views.upload_document, name='pujar_document'),

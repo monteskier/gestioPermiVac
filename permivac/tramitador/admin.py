@@ -51,14 +51,7 @@ class DocumentAdmin(admin.ModelAdmin):
 
 class CalendariAdmin(admin.ModelAdmin):
     list_display = ('any','get_treballador_nom','get_treballador_cognoms','vacances','perm_precep','perm_no_precep', 'asum_p','asum_p_dies')
-    fieldsets = (
-        (None, {
-           'fields': ('any','vacances','perm_precep','perm_no_precep', 'asum_p','asum_p_dies')
-        }),
-        ('Advanced options', {
-            'fields': ('get_treballador_nom','get_treballador_cognoms',),
-        }),
-    )
+        
     def get_treballador_nom(self, obj):
         return obj.treballador.first_name
 
