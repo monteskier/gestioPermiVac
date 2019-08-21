@@ -4,8 +4,40 @@
 {% endblock %}
 {% block javascript %}
 <script>
-	$('#calendar').calendar({
-		showHeaders: false
-	});
+	 $('#calendar').calendar();
+	 $('#calendar').data('calendar').setLanguage('es').val());
+
+
+  {% for tramit in tramits_finalitzats %}
+    $data_sol = "{{tramit.data_sol}}";
+    console.log("Vector = " + $data_sol );
+    $data_sol = $data_sol.split(';')
+
+    var i
+    for(i=0;i<$data_sol.length-1;i++){
+      var exp = /\//
+      if(exp.test($data_sol)){
+        $rang = $data_sol[i].split('/');
+        $inici = $rang[0];
+        $final = $rang[1];
+        //if(typeof $final != undefined){
+          console.log("Data inicial = "+$inici);
+          console.log("Data final = "+$final);
+          $inici = $inici.split('-');
+          $final = $final.split('-');
+					//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
+          //$('#calendar').calendar('appendText', "{{tramit.tipus}}" ,parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
+        //}
+      }
+      else if($data_sol.length <= 11){
+        console.log("Dates fora de rang:"+$data_sol);
+        $data = $data_sol.toString();
+        $data = $data.split('-');
+				//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
+        //$('#calendar').calendar('appendText', "{{tramit.tipus}}",parseInt($data[0]), parseInt($data[1]), parseInt($data[2]));
+      }
+
+    }
+  {% endfor %}
 </script>
 {% endblock %}

@@ -154,7 +154,18 @@ def historic(request):
 
 @login_required
 def calendari(request):
-    return render(request, 'tramits/calendari.html')
+    today = datetime.date.today()
+    groups = request.user.groups.all()
+    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True) &Q(creat_en__year=today.year))
+    try:
+        calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
+        context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
+        return render(request, 'tramits/calendari.html', context)
+    except Calendari.DoesNotExist:
+
+        context = {'tramits_finalitzats': tramits_finalitzats}
+        return render(request, 'tramits/calendari.html', context)
+
 
 @login_required
 def nou_tramit(request):
