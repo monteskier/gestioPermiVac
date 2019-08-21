@@ -11,7 +11,7 @@
 		days: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
 		daysShort: ["Diu", "Dil", "Dim", "Dic", "Dij", "Div", "Dib"],
 		daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-		months: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Septembre", "Octubre", "Novembre", "Decembre"],
+		months: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Decembre"],
 		monthsShort: ["Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
 		weekShort: 'S',
 		weekStart: 1
