@@ -1,18 +1,18 @@
 /**
  * Spanish translation for bootstrap-year-calendar
  * Paul DAVID-SIVELLE
- * Based on 
+ * Based on
  * Spanish translation for bootstrap-datepicker
  * Bruno Bonamin <bruno.bonamin@gmail.com>
  */
- 
+
 ;(function($){
 	$.fn.calendar.dates['es'] = {
-		days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-		daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+		days: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
+		daysShort: ["Diu", "Dil", "Dim", "Dic", "Dij", "Div", "Dib"],
 		daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-		months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-		monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+		months: ["Gener", "Febrer", "MarÃ§", "Abril", "Maig", "Juny", "Juliol", "Agost", "Septembre", "Octubre", "Novembre", "Decembre"],
+		monthsShort: ["Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
 		weekShort: 'S',
 		weekStart: 1
 	};
