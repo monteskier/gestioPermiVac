@@ -4,10 +4,11 @@
 {% endblock %}
 {% block javascript %}
 <script>
+	$(document).ready(function(){
+
 	 $('#calendar').calendar();
-	 $('#calendar').data('calendar').setLanguage('es').val());
-
-
+	 $('#calendar').data('calendar').setLanguage('es').val();
+/*
   {% for tramit in tramits_finalitzats %}
     $data_sol = "{{tramit.data_sol}}";
     console.log("Vector = " + $data_sol );
@@ -27,7 +28,7 @@
           $final = $final.split('-');
 					//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
           //$('#calendar').calendar('appendText', "{{tramit.tipus}}" ,parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
-        //}
+        }
       }
       else if($data_sol.length <= 11){
         console.log("Dates fora de rang:"+$data_sol);
@@ -39,5 +40,7 @@
 
     }
   {% endfor %}
+	*/
+});
 </script>
 {% endblock %}
