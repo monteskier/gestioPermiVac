@@ -10,7 +10,7 @@
 	$.fn.calendar.dates['es'] = {
 		days: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
 		daysShort: ["Diu", "Dil", "Dim", "Dic", "Dij", "Div", "Dib"],
-		daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+		daysMin: ["Dg", "Dl", "Dm", "Dc", "Dj", "Dv", "Ds"],
 		months: ["Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Decembre"],
 		monthsShort: ["Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec"],
 		weekShort: 'S',
