@@ -38,8 +38,8 @@
 					item ["id"] = {{tramit.id}};
 					item ["name"] = "{{tramit.tipus}}";
 					item ["location"] = "{{tramit.missatge_usuari}}";
-					item ["startDate"] = new Date(parseInt($inici[0]), parseInt($inici[1]+1), parseInt($inici[2]));
-					item ["endDate"] = new Date(parseInt($final[0]), parseInt($final[1]+1), parseInt($final[2]));
+					item ["startDate"] = new Date($inici[0], parseInt($inici[1]+1), parseInt($inici[2]));
+					item ["endDate"] = new Date($final[0], parseInt($final[1]+1), parseInt($final[2]));
 					//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
           //$('#calendar').calendar('appendText', "{{tramit.tipus}}" ,parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
 					jsonObj.push(item);
@@ -52,8 +52,8 @@
 				item ["id"] = {{tramit.id}};
 				item ["name"] = "{{tramit.tipus}}";
 				item ["location"] = "{{tramit.missatge_usuari}}";
-				item ["startDate"] = new Date(parseInt($data[0]), parseInt($data[1]+1), parseInt($data[2]));
-				item ["endDate"] = new Date(parseInt($data[0]), parseInt($data[1]+1), parseInt($data[2]));
+				item ["startDate"] = new Date($data[0], parseInt($data[1]+1), parseInt($data[2]));
+				item ["endDate"] = new Date($data[0], parseInt($data[1]+1), parseInt($data[2]));
 				//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
         //$('#calendar').calendar('appendText', "{{tramit.tipus}}",parseInt($data[0]), parseInt($data[1]), parseInt($data[2]));
 				jsonObj.push(item);
