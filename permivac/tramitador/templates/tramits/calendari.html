@@ -11,7 +11,7 @@
 	$(document).ready(function(){
 
 	 $('#calendar').calendar();
-	 $('#calendar').data('calendar').setLanguage($('#language').val());
+
 	 jsonObj = [];
 	 var currentYear = new Date().getFullYear();
 	 console.log("Any actual"+currentYear);
@@ -93,6 +93,7 @@ dayContextMenu: function(e) {
 },
 		dataSource: jsonObj,
 	});
+	$('#calendar').data('calendar').setLanguage($('#language').val());
 });
 </script>
 {% endblock %}
