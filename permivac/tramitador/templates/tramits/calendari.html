@@ -45,7 +45,7 @@
 					jsonObj.push(item);
         }
       }
-      else if($data_sol.length <= 11){
+      if($data_sol.length <= 11){
         console.log("Dates fora de rang:"+$data_sol);
         $data = $data_sol.toString();
         $data = $data.split('-');
