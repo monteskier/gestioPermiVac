@@ -27,7 +27,7 @@
         $rang = $data_sol[i].split('/');
         $inici = $rang[0];
         $final = $rang[1];
-        if(typeof $final != undefined || $final != null){
+        if(typeof $final != undefined && $final != null){
           console.log("Data inicial = "+$inici);
           console.log("Data final = "+$final);
           $inici = $inici.split('-');
