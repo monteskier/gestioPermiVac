@@ -23,7 +23,7 @@
     for(i=0;i<$data_sol.length-1;i++){
 			item = {};
       var exp = /\//
-      if(exp.test($data_sol)){
+      if(exp.test($data_sol[i]) == true){
         $rang = $data_sol[i].split('/');
         $inici = $rang[0];
         $final = $rang[1];
@@ -44,10 +44,9 @@
           //$('#calendar').calendar('appendText', "{{tramit.tipus}}" ,parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
 					jsonObj.push(item);
         }
-      }
-      else{
-        console.log("Dates fora de rang:"+$data_sol);
-        $data = $data_sol.toString();
+      }else{
+        console.log("Dates fora de rang:"+$data_sol[i]);
+        $data = $data_sol[i].toString();
         $data = $data.split('-');
 
 				item ["id"] = {{tramit.id}};
