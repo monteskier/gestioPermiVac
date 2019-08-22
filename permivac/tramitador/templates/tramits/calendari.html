@@ -1,46 +1,99 @@
 {% extends 'tramits/base.html' %}
 {% block content %}
 <div id="calendar"></div>
+
+<item type="hidden" value="es" id="language"/>
+
+
 {% endblock %}
 {% block javascript %}
 <script>
 	$(document).ready(function(){
 
 	 $('#calendar').calendar();
-	 $('#calendar').data('calendar').setLanguage('es').val();
-/*
+	 $('#calendar').data('calendar').setLanguage($('#language').val());
+	 jsonObj = [];
+
+
   {% for tramit in tramits_finalitzats %}
     $data_sol = "{{tramit.data_sol}}";
     console.log("Vector = " + $data_sol );
-    $data_sol = $data_sol.split(';')
-
+    $data_sol = $data_sol.split(';');
     var i
     for(i=0;i<$data_sol.length-1;i++){
+			item = {};
       var exp = /\//
       if(exp.test($data_sol)){
         $rang = $data_sol[i].split('/');
         $inici = $rang[0];
         $final = $rang[1];
-        //if(typeof $final != undefined){
+        if(typeof $final != undefined){
           console.log("Data inicial = "+$inici);
           console.log("Data final = "+$final);
           $inici = $inici.split('-');
           $final = $final.split('-');
+
+					//Aqui crem la cadena de fomrat json que serviras per pintar els dies.
+
+					item ["id"] = {{tramit.id}};
+					item ["name"] = "{{tramit.tipus}}";
+					item ["location"] = "{{tramit.missatge_usuari}}";
+					item ["startDate"] = new Date(parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
+					item ["endDate"] = new Date(parseInt($final[0]), parseInt($final[1]), parseInt($final[2]));
 					//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
           //$('#calendar').calendar('appendText', "{{tramit.tipus}}" ,parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
+					jsonObj.push(item);
         }
       }
       else if($data_sol.length <= 11){
         console.log("Dates fora de rang:"+$data_sol);
         $data = $data_sol.toString();
         $data = $data.split('-');
+
+				item ["id"] = {{tramit.id}};
+				item ["name"] = "{{tramit.tipus}}";
+				item ["location"] = "{{tramit.missatge_usuari}}";
+				item ["startDate"] = new Date(parseInt($data[0]), parseInt($data[1]), parseInt($data[2]));
+				item ["endDate"] = new Date(parseInt($data[0]), parseInt($data[1]), parseInt($data[2]));
 				//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
         //$('#calendar').calendar('appendText', "{{tramit.tipus}}",parseInt($data[0]), parseInt($data[1]), parseInt($data[2]));
+				jsonObj.push(item);
       }
 
     }
   {% endfor %}
-	*/
+	console.log(jsonObj);
+	$('#calendar').calendar({
+		mouseOnDay: function(e){
+			if(e.events.length > 0){
+				var content = '';
+				for(var i in e.events) {
+					content += '<div class="event-tooltip-content">'
+									+ '<div class="event-name" style="color:'
+									+ e.events[i].color + '">' + e.events[i].name + '</div>'
+									+ '<div class="event-location">' + e.events[i].location + '</div>'
+									+ '</div>';
+				}
+
+				$(e.element).popover({
+						trigger: 'manual',
+						container: 'body',
+						html:true,
+						content: content
+				});
+				$(e.element).popover('show');
+		}
+},
+mouseOutDay: function(e) {
+		if(e.events.length > 0) {
+				$(e.element).popover('hide');
+		}
+},
+dayContextMenu: function(e) {
+		$(e.element).popover('hide');
+},
+		dataSource: jsonObj,
+	});
 });
 </script>
 {% endblock %}
