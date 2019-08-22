@@ -67,7 +67,7 @@ class Tramit(models.Model):
     document = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True, blank=True)
     creat_en = models.DateTimeField(auto_now_add=True)
     modificat_en = models.DateTimeField(auto_now=True)
-    data_sol = models.CharField(max_length=250, help_text = "Interval de dates amb guións '-', per dies no consecutios emprar ',' Exemple:01/01/2019 - 05/01/2019, 07/01/2019")
+    data_sol = models.CharField(max_length=250, help_text = "Interval de dates amb guións '/', per dies no consecutios emprar ';' Exemple:2019-08-01-2019-08-20;2019-09-09")
     tipus = models.CharField(max_length=40, choices=tipologia, default='asum_p')
     finalitzat = models.BooleanField(default=False)
 
