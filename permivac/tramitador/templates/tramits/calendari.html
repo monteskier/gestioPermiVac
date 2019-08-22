@@ -14,6 +14,12 @@
 	 $('#calendar').data('calendar').setLanguage($('#language').val());
 	 jsonObj = [];
 
+	 var today = new Date();
+	 var day = today.getDate();
+	 var month = today.getMonth() + 1;
+	 var year = today.getFullYear();
+
+	 alert( day + "." + month + "." + year);
 
   {% for tramit in tramits_finalitzats %}
     $data_sol = "{{tramit.data_sol}}";
