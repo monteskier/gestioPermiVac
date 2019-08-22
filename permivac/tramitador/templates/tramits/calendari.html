@@ -14,13 +14,6 @@
 	 $('#calendar').data('calendar').setLanguage($('#language').val());
 	 jsonObj = [];
 
-	 var today = new Date();
-	 var day = today.getDate();
-	 var month = today.getMonth() + 1;
-	 var year = today.getFullYear();
-
-	 alert( day + "." + month + "." + year);
-
   {% for tramit in tramits_finalitzats %}
     $data_sol = "{{tramit.data_sol}}";
     console.log("Vector = " + $data_sol );
@@ -38,7 +31,7 @@
           console.log("Data final = "+$final);
           $inici = $inici.split('-');
           $final = $final.split('-');
-
+					console.log("QUE COI ="+$inici[0], parseInt($inici[1]+1), parseInt($inici[2]));
 					//Aqui crem la cadena de fomrat json que serviras per pintar els dies.
 
 					item ["id"] = {{tramit.id}};
