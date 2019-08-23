@@ -111,7 +111,7 @@ class Calendari(models.Model):
     asum_p = models.IntegerField(default=6,verbose_name="Assumptes perosnals disponibles:")
     asum_p_dies = models.CharField(max_length=500, blank=True)
 
-    perm_indisposicio = models.IntegerField(default=0, verbose_name="Permissos preceptius fets:")
+    perm_indisposicio = models.IntegerField(default=0, verbose_name="Permissos per indisposició fets:", blank=True)
     perm_indisposicio_dies = models.CharField(max_length=500, blank=True)
 
     treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
