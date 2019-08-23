@@ -155,12 +155,34 @@ def historic(request):
 @login_required
 def calendari(request):
     today = datetime.date.today()
-    groups = request.user.groups.all()
     tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True) &Q(creat_en__year=today.year))
     try:
-        calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
-        context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
-        return render(request, 'tramits/calendari.html', context)
+        groups = request.user.groups.all()
+        l = []
+        for g in groups:
+            l.append(g.name)
+
+        if("RRHH" in l):
+            if request.method =='POST':
+                pk = request.POST.get('seleccio')
+                print(pk)
+                treballadors = Treballadors.objects.all();
+                calendari = Calendari.objects.get(treballador__id = pk, any=today.year)
+                tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=pk) & Q(finalitzat=True) &Q(creat_en__year=today.year))
+                print (calendari.treballador.username)
+                context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari, 'treballadors':treballadors}
+                return render(request, 'tramits/calendari.html', context)
+
+            else:
+                treballadors = Treballadors.objects.all();
+                calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
+                context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari, 'treballadors':treballadors}
+                return render(request, 'tramits/calendari.html', context)
+        else:
+            calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
+            context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
+            return render(request, 'tramits/calendari.html', context)
+
     except Calendari.DoesNotExist:
 
         context = {'tramits_finalitzats': tramits_finalitzats}

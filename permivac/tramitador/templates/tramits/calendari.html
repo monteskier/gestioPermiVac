@@ -1,5 +1,17 @@
 {% extends 'tramits/base.html' %}
+{% load group %}
 {% block content %}
+	{% if request.user|has_group:"RRHH" %}
+		<form method="post" id="triar">{% csrf_token %}
+			<label for="seleccio">Treballador:</label>
+			<select id="seleccio" name="seleccio">
+				{% for treballador in treballadors %}
+					<option value={{treballador.id}}>{{ treballador.last_name }},{{ treballador.first_name }}</option>
+				{% endfor %}
+			</select>
+			<input type="submit" name="Cercar" value="Cercar">
+		</form>
+	{% endif %}
 <div id="calendar"></div>
 
 <item type="hidden" value="es" id="language"/>
@@ -9,7 +21,6 @@
 {% block javascript %}
 <script>
 	$(document).ready(function(){
-
 	 $('#calendar').calendar();
 
 	 jsonObj = [];
@@ -109,5 +120,6 @@ dayContextMenu: function(e) {
 	});
 	$('#calendar').data('calendar').setLanguage($('#language').val());
 });
+
 </script>
 {% endblock %}
