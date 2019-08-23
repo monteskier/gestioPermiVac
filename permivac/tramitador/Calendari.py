@@ -58,5 +58,10 @@ class Cal:
                 calendari.asum_p_dies = calendari.asum_p_dies + data_sol
                 calendari.save()
 
+            elif(tipus=="perm_indisposicio"):
+                calendari.perm_indisposicio = calendari.perm_indisposicio + dies
+                calendari.perm_indisposicio_dies = calendari.perm_indisposicio_dies + data_sol
+                calendari.save()
+
         except Calendari.DoesNotExist:
             return False
