@@ -62,6 +62,7 @@ class Tramit(models.Model):
         ('perm_precep', 'Permisos preceptius'),
         ('perm_no_precep', 'Permisos no preceptius'),
         ('asum_p', 'Asumptes personals'),
+        ('perm_indisposicio', 'Permis Indisposicio'),
     )
     treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
     document = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True, blank=True)
