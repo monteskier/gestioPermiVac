@@ -110,7 +110,6 @@ class Calendari(models.Model):
     perm_no_precep_dies = models.CharField(max_length=500, blank=True)
     asum_p = models.IntegerField(default=6,verbose_name="Assumptes perosnals disponibles:")
     asum_p_dies = models.CharField(max_length=500, blank=True)
-
     perm_indisposicio = models.IntegerField(default=0, verbose_name="Permissos per indisposició fets:", blank=True)
     perm_indisposicio_dies = models.CharField(max_length=500, blank=True)
 
