@@ -39,6 +39,9 @@ class Treballadors(AbstractUser):
     """rol = models.CharField(max_length=20, choices = tip_rols, default = 'treb')
     estat = models.CharField(max_length=10, choices = tip_estats, default = 'alta')"""
 
+    class Meta:
+        ordering = ['first_name','last_name']
+
     def __str__(self):
         return self.username
 

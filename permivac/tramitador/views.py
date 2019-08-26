@@ -174,14 +174,13 @@ def calendari(request):
                 return render(request, 'tramits/calendari.html', context)
 
             else:
-                treballadors = Treballadors.objects.all();
                 calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
-                context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari, 'treballadors':treballadors}
+                treballadors = Treballadors.objects.all();
+                context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari,'treballadors':treballadors}
                 return render(request, 'tramits/calendari.html', context)
         else:
-            treballadors = Treballadors.objects.all();
             calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
-            context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari, 'treballadors':treballadors}
+            context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
             return render(request, 'tramits/calendari.html', context)
 
     except Calendari.DoesNotExist:
