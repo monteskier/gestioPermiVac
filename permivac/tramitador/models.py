@@ -66,6 +66,7 @@ class Tramit(models.Model):
         ('perm_no_precep', 'Permisos no preceptius'),
         ('asum_p', 'Asumptes personals'),
         ('perm_indisposicio', 'Permis Indisposicio'),
+        ('perm_altres', 'Altres permissos'),
     )
     treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
     document = models.ForeignKey(Document, on_delete=models.SET_NULL, null=True, blank=True)
@@ -115,6 +116,8 @@ class Calendari(models.Model):
     asum_p_dies = models.CharField(max_length=500, blank=True)
     perm_indisposicio = models.IntegerField(default=0, verbose_name="Permissos per indisposició fets:", blank=True)
     perm_indisposicio_dies = models.CharField(max_length=500, blank=True)
+    perm_altres = models.IntegerField(default=0, verbose_name="Altres permissos", blank=True)
+    perm_altres_dies = models.CharField(max_length=500, blank=True)
 
     treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE)
 

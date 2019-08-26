@@ -63,5 +63,10 @@ class Cal:
                 calendari.perm_indisposicio_dies = calendari.perm_indisposicio_dies + data_sol
                 calendari.save()
 
+            elif(tipus=="perm_altres"):
+                calendari.perm_altres = calendari.perm_altres + dies
+                calendari.perm_altres_dies = calendari.perm_altres_dies + data_sol
+                calendari.save()
+
         except Calendari.DoesNotExist:
             return False
