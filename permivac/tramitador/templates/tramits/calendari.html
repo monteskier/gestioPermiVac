@@ -14,7 +14,7 @@
 	{% endif %}
 <div id="calendar"></div>
 
-<item type="hidden" value="es" id="language"/>
+<input type="hidden" value="es" id="language"/>
 
 
 {% endblock %}
@@ -118,7 +118,9 @@ dayContextMenu: function(e) {
 },
 		dataSource: jsonObj,
 	});
-	$('#calendar').data('calendar').setLanguage($('#language').val());
+	
+	$('#calendar').data('calendar').setLanguage($('input#language').val());
+
 });
 
 </script>
