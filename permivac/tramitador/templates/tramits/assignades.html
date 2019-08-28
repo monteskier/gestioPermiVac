@@ -9,7 +9,13 @@
         <label for='missatge'>Missatge:</label>
         <textarea name='missatge' id='missatge' cols='50' rows='4'></textarea>
         <input type="hidden" value="" name="id">
-        <input type='submit' value='Dessar'/>
+
+        <button type="button" class="btn btn-default btn-sm" name="tancar">
+          <span class="glyphicon glyphicon-remove"></span> Tancar
+        </button>
+        <button type='submit' value='Dessar' class="btn btn-default btn-sm">
+          <span class="glyphicon glyphicon-ok"></span> Desar
+        </button>        
       </form>
     </div>
     <table class="TFtable">
@@ -128,6 +134,9 @@
         console.log($("input[name='id']").val());
 
 
+      });
+      $("button[name=tancar]").click(function(e){
+        $('.flotant').css('display','none');
       });
       $('.flotant').submit(function(e){
         $('.flotant').css('display','none');
