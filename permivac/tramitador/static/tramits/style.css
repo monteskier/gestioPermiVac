@@ -53,6 +53,21 @@
   justify-content: flex-start;
   border-color: red;
 }
+.flotant{
+  display:none;
+  justify-content: center;
+  flex-direction:row;
+  position:absolute;
+  height: auto;
+  width: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  padding:5px;
+
+
+}.flotant label{
+    color:white;
+}
 
 .TFtable{
   width: 100%;

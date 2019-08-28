@@ -9,7 +9,7 @@
 					<option value={{treballador.id}}>{{ treballador.last_name }},{{ treballador.first_name }}</option>
 				{% endfor %}
 			</select>
-			<input type="submit" name="Cercar" value="Cercar">
+				<input type="submit" name="Cercar" value="Cercar">
 		</form>
 	{% endif %}
 <div id="calendar"></div>
@@ -51,6 +51,7 @@
 					item ["location"] = "{{tramit.missatge_usuari}}";
 					item ["startDate"] = new Date(parseInt($inici[0]), parseInt($inici[1]-1), parseInt($inici[2]));
 					item ["endDate"] = new Date(parseInt($final[0]), parseInt($final[1]-1), parseInt($final[2]));
+					//item ["link"] = "{% url 'tramit_detall' tramit.id %}";
 					//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
           //$('#calendar').calendar('appendText', "{{tramit.tipus}}" ,parseInt($inici[0]), parseInt($inici[1]), parseInt($inici[2]));
 					jsonObj.push(item);
@@ -65,6 +66,7 @@
 				item ["location"] = "{{tramit.missatge_usuari}}";
 				item ["startDate"] = new Date(parseInt($data[0]), parseInt($data[1])-1, parseInt($data[2]));
 				item ["endDate"] = new Date(parseInt($data[0]), parseInt($data[1])-1, parseInt($data[2]));
+				//item ["link"] = "{% url 'tramit_detall' tramit.id %}";
 				//Substituir la proxima linea per el nou calendari bootsrap del dia 21-09-2019
         //$('#calendar').calendar('appendText', "{{tramit.tipus}}",parseInt($data[0]), parseInt($data[1]), parseInt($data[2]));
 				jsonObj.push(item);
@@ -117,8 +119,15 @@ dayContextMenu: function(e) {
 		$(e.element).popover('hide');
 },
 		dataSource: jsonObj,
+		/* SEGURAMENT AQUESTA ACCIO ES QUAN ES CLICA UNA CASELLA, SERVIRA PER LINKAR AMB EL TRAMIT.
+		renderEnd: function(e) {
+    	if($('#render-end').prop('checked')){
+				//window.location.href = e.link;
+				//console.log(e.link);
+			}
+		});*/
 	});
-	
+
 	$('#calendar').data('calendar').setLanguage($('input#language').val());
 
 });

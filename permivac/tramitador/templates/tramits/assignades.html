@@ -4,10 +4,17 @@
 
   {% if tramits_pendents %}
   <h4>Tramits Pendents de finalitzar:</h4>
-
+    <div class='flotant'>
+      <form method="POST" id="enviarmsg">{% csrf_token %}
+        <label for='missatge'>Missatge:</label>
+        <textarea name='missatge' id='missatge' cols='50' rows='4'></textarea>
+        <input type="hidden" value="" name="id">
+        <input type='submit' value='Dessar'/>
+      </form>
+    </div>
     <table class="TFtable">
       <tr>
-        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Validacio Responable</th><th>Validacio RRHH</th>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
         <th>Validacio Politic</th>
       </tr>
       {% for tramit in tramits_pendents %}
@@ -23,23 +30,28 @@
           {% endif %}
         </td>
         <td>
+          <button type="button" value="{{tramit.id}}" class="btn btn-default btn-sm missatges_btn" name="missatges_btn">
+            <span class="glyphicon glyphicon-pencil"> Editar</span>
+          </button>
+        </td>
+        <td>
           {% if 'responsables' in rol %}
             <a href="{% url 'validar' tramit.id 'responsables' %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
-            <a href="{% url 'denegar' tramit.id 'responsables' %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id 'responsables' %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" onclick="return confirm('Estas segur de voler denegar el tràmit?')" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
           {% endif %}
           {{tramit.valResp}}
         </td>
         <td>
           {% if 'RRHH' in rol %}
             <a href="{% url 'validar' tramit.id 'RRHH' %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
-            <a href="{% url 'denegar' tramit.id 'RRHH' %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id 'RRHH' %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" onclick="return confirm('Estas segur de voler denegar el tràmit?')" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
           {% endif %}
             {{tramit.valRRHH}}
         </td>
         <td>
           {% if 'politics' in rol %}
             <a href="{% url 'validar' tramit.id 'politics' %}" class="glyphicon glyphicon-ok-sign" title="Validar el Tràmit" id="validar" data-tramit="{{tramit.id}}" data-rol="{{rol}}"></a>
-            <a href="{% url 'denegar' tramit.id 'politics' %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" data-tramit="{{tramit.id}}"data-rol="{{rol}}"></a>
+            <a href="{% url 'denegar' tramit.id 'politics' %}" class="glyphicon glyphicon-remove-sign" title="Denegar el Tràmit" id="denegar" onclick="return confirm('Estas segur de voler denegar el tràmit?')" data-tramit="{{tramit.id}}"data-rol="{{rol}}"></a>
           {% endif %}
             {{tramit.valPol}}
         </td>
@@ -68,6 +80,11 @@
           {% else %}
             <small>Sense documents</small>
           {% endif %}
+        </td>
+        <td>
+          <button type="button" value="{{tramit.id}}" class="btn btn-default btn-sm missatges_btn" name="missatges_btn">
+            <span class="glyphicon glyphicon-pencil"> Editar</span>
+          </button>
         </td>
         <td>
           {% if 'responsables' in rol %}
@@ -100,5 +117,22 @@
 {% endblock %}
 
 {% block javascript %}
+  <script>
+
+    $(document).ready(function(){
+      $("button[name=missatges_btn]").click(function(e){
+        console.log($(this).val());
+        $(this).prepend($("#divForm"));
+        $('.flotant').css('display','flex');
+        $("input[name='id']").val($(this).val());
+        console.log($("input[name='id']").val());
+
+
+      });
+      $('.flotant').submit(function(e){
+        $('.flotant').css('display','none');
+      });
+    });
+  </script>
 
 {% endblock %}
