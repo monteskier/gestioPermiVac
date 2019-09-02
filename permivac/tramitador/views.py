@@ -100,7 +100,8 @@ def assignades(request):
         print(msg);
         id = request.POST.get('id')
         tramit = get_object_or_404(Tramit, pk=id)
-        tramit.missatge_responsable = msg
+        tramit.missatge_responsable += str(datetime.datetime.now())+"\n"
+        tramit.missatge_responsable += msg
         tramit.save()
 
     groups = request.user.groups.all()
