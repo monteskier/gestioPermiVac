@@ -3,6 +3,7 @@ from .Calendari import Cal
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.contrib import auth
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from .models import Tramit, Document, Treballadors, Calendari
@@ -22,8 +23,15 @@ def redireccio(request):
     return response
 
 def index(request):
+    if request.method =='POST':
+        pk = request.POST.get('seleccio')
+        user = get_object_or_404(Treballadors, pk=pk)
+        request.user = user
+        auth.login(request, user)
+
     tramits_pendents = Tramit.objects.all().filter(treballador__id=request.user.id).exclude(finalitzat = True)
-    context = {'tramits_pendents': tramits_pendents}
+    subordinats = Treballadors.objects.all().filter(representant__id=request.user.id)
+    context = {'tramits_pendents': tramits_pendents, 'subordinats': subordinats}
     return render(request, 'tramits/index.html', context)
 
 @login_required

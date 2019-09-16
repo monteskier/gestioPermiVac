@@ -1,7 +1,17 @@
 {% extends 'tramits/base.html' %}
 
 {% block content %}
-
+{% if subordinats %}
+  <form method="post" id="triar">{% csrf_token %}
+    <label for="seleccio">Treballador:</label>
+    <select id="seleccio" name="seleccio">
+      {% for treballador in subordinats %}
+        <option value={{treballador.id}}>{{ treballador.last_name }},{{ treballador.first_name }}</option>
+      {% endfor %}
+    </select>
+      <input type="submit" name="Cercar" value="Entrar">
+  </form>
+{% endif %}
   {% if tramits_pendents %}
   <h4>Tramits Pendents de finalitzar:</h4>
 

@@ -38,7 +38,7 @@ class Treballadors(AbstractUser):
     areas = models.ManyToManyField(Area)
     """rol = models.CharField(max_length=20, choices = tip_rols, default = 'treb')
     estat = models.CharField(max_length=10, choices = tip_estats, default = 'alta')"""
-
+    representant = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null = True)
     class Meta:
         ordering = ['first_name','last_name']
 

@@ -24,13 +24,13 @@ class CustomUserAdmin(UserAdmin):
                     'fields': ('username','password')}),
                     ('Dades Perosnals',{'fields':('first_name','last_name','email','dni')}),
                     ('Dades sobre el treballador',{'fields':('areas',)}),
-                    ('Permissos',{'fields':('is_active','is_staff','is_superuser','groups')}),
+                    ('Permissos',{'fields':('is_active','is_staff','is_superuser','groups','representant')}),
                     ('Dades interesants',{'fields':('last_login','date_joined',)}),
 
                 )
     form = CustomUserChangeForm
     model = Treballadors
-    list_display =  ['username','first_name','last_name','dni','email','date_joined']
+    list_display =  ['username','first_name','last_name','dni','email','date_joined','representant']
 
 admin.site.register(Treballadors, CustomUserAdmin)
 
