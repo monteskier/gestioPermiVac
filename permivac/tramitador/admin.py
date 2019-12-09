@@ -51,7 +51,7 @@ class DocumentAdmin(admin.ModelAdmin):
 
 class CalendariAdmin(admin.ModelAdmin):
     list_display = ('any','get_treballador_nom','get_treballador_cognoms','vacances','perm_precep','perm_no_precep', 'asum_p','asum_p_dies','perm_indisposicio')
-
+    search_fields = ['treballador__last_name','treballador__first_name',]
     def get_treballador_nom(self, obj):
         return obj.treballador.first_name
 
