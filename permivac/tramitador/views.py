@@ -108,8 +108,13 @@ def assignades(request):
         print(msg);
         id = request.POST.get('id')
         tramit = get_object_or_404(Tramit, pk=id)
-        tramit.missatge_responsable += str(datetime.datetime.now())+"\n"
-        tramit.missatge_responsable += msg
+        if(tramit.missatge_responsable==None):
+            tramit.missatge_responsable = str(datetime.datetime.now())+"\n"
+            tramit.missatge_responsable = msg
+        else:
+            tramit.missatge_responsable += str(datetime.datetime.now())+"\n"
+            tramit.missatge_responsable += msg
+
         tramit.save()
 
     groups = request.user.groups.all()
@@ -214,7 +219,6 @@ def nou_tramit(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.treballador = request.user
-            post.missatge_responsable = "-"
             post.save()
             responsables = Treballadors.objects.all().filter(Q(areas__in = request.user.areas.all()) & Q( groups__name = 'responsables'))
             if(responsables != None):
