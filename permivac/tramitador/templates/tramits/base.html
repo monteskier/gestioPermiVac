@@ -22,11 +22,17 @@
       {% block heading %}
         {% if user.is_authenticated %}
           Bevingut sr/ra {{ user.first_name }} {{ user.last_name }}
-        {% else %}
-          <p>Encara no t'has autentificat:<a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Entrar</button></a></p>
         {% endif %}
       {% endblock %}
     </div>
+    {% if not user.is_authenticated %}
+      <div id="senseacces" class="col-md 12 well">
+        <div><h4>Acces a l'aplicació Permissos i Vacances AjSVC</h4></div>
+        <div><p>Encara no t'has autentificat:</p>
+          <a href="{% url 'login' %}"><button type="button" class="btn btn-primary">Entrar</button></a>
+        </div>
+      </div>
+    {% endif %}
     {% if user.is_authenticated %}
 
       <div id="main_block">
