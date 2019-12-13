@@ -62,7 +62,7 @@ def validar(request, pk, rol):
         tramit.save();
         treballador = tramit.treballador
         if(treballador != None):
-            send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.\n"+tramit.missatge_responsable,'ajsvcsid@gmail.com',treballador.email)
+            send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.\n Missatge dels responsables:\n"+tramit.missatge_responsable,'ajsvcrrhh@gmail.com',[treballador.email,])
             #NOVA LINEA PER RESTAR ELS DIES DEL CALENDARI:
             cal = Cal()
             if(cal.exist(treballador.id)!=False):
@@ -82,21 +82,21 @@ def denegar(request, pk, rol):
         tramit.save()
         treballador = tramit.treballador
         if(treballador != None):
-            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n"+tramit.missatge_responsable+"\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',treballador.email)
+            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n Missatge dels responsables:\n"+tramit.missatge_responsable+"\n Posis en contacte amb el Regidor per més informació ",'ajsvcrrhh@gmail.com',[treballador.email,])
 
     elif("RRHH" in rol):
         tramit.valRRHH = "inconforme"
         tramit.save()
         treballador = tramit.treballador
         if(treballador != None):
-            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n"+tramit.missatge_responsable+"\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
+            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n"+tramit.missatge_responsable+"\n Posis en contacte amb el Regidor per més informació ",'ajsvcrrhh@gmail.com',[treballador.email,])
     elif("politics" in rol):
         tramit.valPol = "inconforme"
         tramit.save()
         treballador = tramit.treballador
         """RRHH = Treballadors.objects.all().filter(Q(areas = "RRHH") & Q( groups__name = 'responsables'))"""
         if(treballador != None):
-            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n"+tramit.missatge_responsable+"\n Posis en contacte amb el Regidor per més informació ",'ajsvcsid@gmail.com',[treballador.email,])
+            send_mail('DENEGACIÓ DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha estat rebutjada.\n"+tramit.missatge_responsable+"\n Posis en contacte amb el Regidor per més informació ",'ajsvcrrhh@gmail.com',[treballador.email,])
 
     return redirect ('/permivac/tramitador/assignades')
 
@@ -214,6 +214,7 @@ def nou_tramit(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.treballador = request.user
+            post.missatge_responsable = "-"
             post.save()
             responsables = Treballadors.objects.all().filter(Q(areas__in = request.user.areas.all()) & Q( groups__name = 'responsables'))
             if(responsables != None):
@@ -221,7 +222,7 @@ def nou_tramit(request):
                 for r in responsables:
                     email.append(r.email)
 
-                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.data_sol+"\n Tipus:"+post.tipus+'\n Comentaris:'+post.missatge_usuari,'ajsvcsid@gmail.com',email)
+                send_mail('PETICIO DE DIA O ASSUPMTES PERSONALS', 'El/la treballador/a '+post.treballador.first_name+' i '+post.treballador.last_name+' ha fet una peticio de dies i assumptes a traves d ela plataforma web.\n'+'Sol·licitud:'+post.data_sol+"\n Tipus:"+post.tipus+'\n Comentaris:'+post.missatge_usuari,'ajsvcrrhh@gmail.com',email)
                 return redirect('tramit_detall', pk=post.pk)
         else:
             return HttpResponse("Dades incorrectes, no s'ha pogut desar")
