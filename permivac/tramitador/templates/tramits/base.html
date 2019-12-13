@@ -37,7 +37,7 @@
             {% if request.user|has_group:"RRHH;responsables;politics" %}
               <li><a href="{% url 'assignades' %}">Assignades</a></li>
             {% endif %}
-            
+
             <li><a href="{% url 'historic' %}">Historic</a></li>
             <li><a target="_blank" href="{% static 'documentacio/manual.pdf' %}">Informacio sobre el Tramit</a></li>
             <li><a target="_blank" href="{% url 'calendari' %}">Calendari</a></li>
