@@ -108,12 +108,12 @@ def assignades(request):
         print(msg);
         id = request.POST.get('id')
         tramit = get_object_or_404(Tramit, pk=id)
-        if(tramit.missatge_responsable==None):
-            tramit.missatge_responsable = str(datetime.datetime.now())+"\n"
-            tramit.missatge_responsable = msg
-        else:
+        try:
             tramit.missatge_responsable += str(datetime.datetime.now())+"\n"
             tramit.missatge_responsable += msg
+        except:
+            tramit.missatge_responsable = str(datetime.datetime.now())+"\n"
+            tramit.missatge_responsable = msg
 
         tramit.save()
 
