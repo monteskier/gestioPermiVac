@@ -65,7 +65,7 @@ def validar(request, pk, rol):
             try:
                 send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.\n Missatge dels responsables:\n"+tramit.missatge_responsable,'ajsvcrrhh@gmail.com',[treballador.email,])
             except:
-                send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.\n,'ajsvcrrhh@gmail.com',[treballador.email,])
+                send_mail('APROVACIO DE LA PETICIO DE DIA O ASSUPMTES PERSONALS',"S'informa de que la seva petició dels dies:"+tramit.data_sol+" ha finalitzat correctament.\n",'ajsvcrrhh@gmail.com',[treballador.email,])
             #NOVA LINEA PER RESTAR ELS DIES DEL CALENDARI:
             cal = Cal()
             if(cal.exist(treballador.id)!=False):
