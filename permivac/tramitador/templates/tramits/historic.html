@@ -6,13 +6,13 @@
 
     <table class="TFtable">
       <tr>
-        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Creat en data</th><th>Finalitzat?</th><th>Document</th>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Missatge Usuari</th><th>Finalitzat?</th><th>Document</th>
         <th>Validacio responsable</th><th>Validacio RRHH</th><th>Validacio Politic</th>
       </tr>
       {% for tramit in tramits_finalitzats %}
       <tr>
         <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
-        <td>{{tramit.creat_en}}</td><td>{{tramit.finalitzat}}</td>
+        <td>{{missatge_usuari}}</td><td>{{tramit.finalitzat}}</td>
         <td>
           {% if tramit.document %}
 
