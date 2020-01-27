@@ -36,6 +36,7 @@ class Treballadors(AbstractUser):
     email = models.CharField(max_length=50)"""
     dni = models.CharField(max_length=20, null = True, blank=True)
     areas = models.ManyToManyField(Area)
+    observacions = models.TextField(null = True, blank=True)
     """rol = models.CharField(max_length=20, choices = tip_rols, default = 'treb')
     estat = models.CharField(max_length=10, choices = tip_estats, default = 'alta')"""
     representant = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null = True)
