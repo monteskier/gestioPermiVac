@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tramitador',
+    'intranet',
     'crispy_forms',
 ]
 AUTH_USER_MODEL = 'tramitador.Treballadors'#nueva linea, para customizar el nuevo tipo de usuario como trabajadores jma

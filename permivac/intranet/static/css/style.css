@@ -1,0 +1,74 @@
+#heading{
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content:center;
+  align-items:center;
+  width: 90%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+  text-decoration: underline;
+  font-weight: bold;
+  /*border-style: groove;
+  border-color: red;*/
+
+}
+#main_block{
+  display:flex;
+  flex-direction:column;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  justify-content: center;
+
+}.block{
+  display:flex;
+  flex-direction:row;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+  justify-content: flex-start;
+}
+ul.menu_options  {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+ul.menu_options li {
+  float: left;
+}
+ul.menu_options li.menu_options_dreta{
+  float:right;
+}
+ul.menu_options li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+ul.menu_options li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+a, i {cursor: pointer;
+
+}
+.amagat{
+  display:none;
+}
+.ui-datepicker td.holiday a, .ui-datepicker td.holiday a:hover {
+    background: none #FFEBAF;
+    border: 1px solid #BF5A0C;
+  }

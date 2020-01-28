@@ -31,6 +31,7 @@ class Treballadors(AbstractUser):
     creat_en = models.DateTimeField(auto_now_add=True)
     modificat_en = models.DateTimeField(auto_now=True)"""
     usuari = models.CharField(max_length=20)
+    document = models.FileField(upload_to='foto')
     """nom = models.CharField(max_length=20)
     cognoms = models.CharField(max_length=20)
     email = models.CharField(max_length=50)"""

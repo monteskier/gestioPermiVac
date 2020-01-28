@@ -12,7 +12,7 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = Treballadors
-        fields = ('username','first_name','last_name','dni','email','areas','observacions')
+        fields = ('username','first_name','last_name','dni','email','areas','observacions','foto')
 
 class TramitSolForm(forms.ModelForm): #Classe per el formulari de nou tramit, sense acces als camps de validacio del Responsable i del politic.
     class Meta:
