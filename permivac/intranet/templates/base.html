@@ -37,9 +37,9 @@
           {% endif %}
           {% if user.is_authenticated %}
             <li class="menu_options_dreta"><a href="{% url 'logout' %}">Sortir</a></li>
-          {% endif %}
-          <li class="menu_options_dreta">
+            <li class="menu_options_dreta">
             <a href="/permivac/tramitador/accounts/password_change/">Canviar la contrasenya</a></li>
+          {% endif %}
         </ul>
       </div>
       {% block content %}
