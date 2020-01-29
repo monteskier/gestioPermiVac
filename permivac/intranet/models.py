@@ -11,3 +11,5 @@ class Links(models.Model):
     )
     tipus = models.CharField(max_length=20, choices=tipologia, default='public')
     areas = models.ManyToManyField(Area)
+    def __str__(self):
+        return self.titol

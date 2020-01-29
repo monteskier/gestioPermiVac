@@ -22,14 +22,11 @@
   margin-left: auto;
   margin-right: auto;
   height: auto;
-  justify-content: center;
+  justify-content:flex-start;
 
 }.block{
   display:flex;
   flex-direction:row;
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
   height: auto;
   justify-content: flex-start;
 }
