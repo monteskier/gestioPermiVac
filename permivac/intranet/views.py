@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from tramitador.models import Treballadors
+from django.shortcuts import redirect
 from .models import Links
 
 # Create your views here.
