@@ -7,13 +7,13 @@
     <h5>Aplicaicons i Extranets:</h5>
     <ul>
       {% for link in links_publics %}
-        <li><a href="{{link.url}}">{{link.titol}}</a></li>
+        <li><a href="{{link.url}}" target="_blank">{{link.titol}}</a></li>
       {% endfor %}
     </ul>
     <h5>Propies del Departament Assignat:</h5>
     <ul>
       {% for link in links_privats %}
-        <li><a href="{{link.url}}">{{link.titol}}</a></li>
+        <li><a href="{{link.url}}" target="_blank">{{link.titol}}</a></li>
       {% endfor %}
     </ul>
   </div>
