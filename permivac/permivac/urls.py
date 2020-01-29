@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 from intranet import views
-from tramitador import views
+from tramitador import views as views_intranet
 
 admin.site.site_header = "RRHH AjSVC Admin"
 admin.site.site_title = "RRHH AjSVC Portal"
@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^tramitador/', include('tramitador.urls')),
     url(r'^intranet/', include('intranet.urls')),
     url(r'^admin/', admin.site.urls),
-    url(r'^$/accounts/login/',views.redireccio),
+    url(r'^$/accounts/login/',views_intranet.redireccio),
 ]

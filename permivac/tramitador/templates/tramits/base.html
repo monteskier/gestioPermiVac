@@ -39,6 +39,7 @@
         <div id="options_block">
           <ul class="menu_options">
             <li><a href="{% url 'index' %}" class="active">Inici</a></li>
+            <li><a href="{% url 'indexIntranet' %}"class ="glyphicon glyphicon-th">Intranet</a></li>
             <li><a href="{% url 'nou_tramit' %}"class ="glyphicon glyphicon-plus">Solicitud</a></li>
             {% if request.user|has_group:"RRHH;responsables;politics" %}
               <li><a href="{% url 'assignades' %}">Assignades</a></li>

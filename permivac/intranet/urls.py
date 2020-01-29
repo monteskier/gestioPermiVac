@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index, name='indexIntranet'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 if settings.DEBUG:
     from django.conf.urls.static import static
