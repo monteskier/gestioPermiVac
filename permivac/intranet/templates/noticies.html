@@ -8,7 +8,7 @@
       <small>{{noticia.creat_en}}</small>
       <p>{{noticia.text}}</p>
       {% if noticia.document %}
-        <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a>
+        <p>Document Annexe: <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a></p>
       {% endif %}
     {% endfor %}
     </div>
