@@ -1,22 +1,5 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Benvinguts a l'Intranet</h5>
-<small>Secció en Desenvolupament</small>
-<div class="block">
-  <div class="col-md-2 well">
-    <h5>Aplicaicons i Extranets:</h5>
-    <ul>
-      {% for link in links_publics %}
-        <li><a href="{{link.url}}" target="_blank">{{link.titol}}</a></li>
-      {% endfor %}
-    </ul>
-    <h5>Propies del Departament Assignat:</h5>
-    <ul>
-      {% for link in links_privats %}
-        <li><a href="{{link.url}}" target="_blank">{{link.titol}}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-</div>
+<h4>Pàgina Principal</h4>
 {% endblock %}

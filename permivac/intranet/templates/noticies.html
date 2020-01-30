@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="noticies">
+    <div>
+    {% for noticia in noticies %}
+      <h4>{{noticia.titol}}</h4>
+      <small>{{noticia.creat_en}}</small>
+      <p>{{noticia.text}}</p>
+      {% if noticia.document %}
+        <a href='/static/documents//{{noticia.document}}' class="glyphicon glyphicon-save-file"></a>
+      {% endif %}
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

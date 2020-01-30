@@ -24,11 +24,28 @@
   height: auto;
   justify-content:flex-start;
 
-}.block{
+}#second_block{
   display:flex;
   flex-direction:row;
+  width:100%;
   height: auto;
+  justify-content:flex-start;
+}.block{
+  display:flex;
+  flex-direction:column;
+  height: auto;
+  width:auto;
   justify-content: flex-start;
+}
+.noticies{
+  display:flex;
+  flex-direction:column;
+  height: auto;
+  width:auto;
+  justify-content: flex-start;
+  padding:10px;
+}.noticies h4{
+  text-decoration: underline;
 }
 ul.menu_options  {
   list-style-type: none;
