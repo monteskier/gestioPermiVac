@@ -144,5 +144,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'tramitador/static/documents/upload')
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'ajsvcrrhh@gmail.com'
-EMAIL_HOST_PASSWORD = 'N0P0tsP4ss4r'
+EMAIL_HOST_PASSWORD = 'N0P0tsP4ss4rX'
 EMAIL_USE_TLS = True
