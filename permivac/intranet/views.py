@@ -28,9 +28,12 @@ def index(request):
         user = get_object_or_404(Treballadors, pk=pk)
         request.user = user
         auth.login(request, user)
+    noticies = Noticia.objects.all().filter(publicat=True).exclude(destacada=False)
+    noticies = {'noticies':noticies}
     manual = getManual()
     context = getMenu(request)
     context.update(manual)
+    context.update(noticies)
 
     return render(request, 'index.html',context)
 

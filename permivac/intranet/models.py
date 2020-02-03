@@ -22,6 +22,8 @@ class Noticia(models.Model):
     document = models.FileField(upload_to='noticies', blank=True, null=True)
     creat_en = models.DateTimeField(auto_now_add=True)
     publicat = models.BooleanField(default=False)
+    destacada = models.BooleanField(default=False)
+    
     def __str__(self):
         return self.titol
 
