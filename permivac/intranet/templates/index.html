@@ -2,16 +2,16 @@
 
 {% block content %}
 <div class="noticies">
-  <h4>Noticies destacades:</h4>
-  {% for noticia in noticies %}
-    <h4>{{noticia.titol}}</h4>
-    <small>{{noticia.creat_en}}</small>
-    <p>{{noticia.text}}</p>
-    {% if noticia.document %}
-      <p>Document Annexe: <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a></p>
-    {% endif %}
-  {% endfor %}
+  <div>
+    <h4>Noticies destacades:</h4>
+    {% for noticia in noticies %}
+      <h4>{{noticia.titol}}</h4>
+      <small>{{noticia.creat_en}}</small>
+      <p>{{noticia.text}}</p>
+      {% if noticia.document %}
+        <p>Document Annexe: <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a></p>
+      {% endif %}
+    {% endfor %}
+  </div>
 </div>
-{% endblock %}
-{% block javascript %}
 {% endblock %}
