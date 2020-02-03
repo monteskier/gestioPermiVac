@@ -25,6 +25,7 @@
   justify-content:flex-start;
 
 }#second_block{
+  margin-top: 10px;
   display:flex;
   flex-direction:row;
   width:100%;
