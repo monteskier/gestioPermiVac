@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="noticies">
-  <div>
-    <h4>Notícies destacades:</h4>
-    {% for noticia in noticies %}
-      <h4>{{noticia.titol}}</h4>
-      <small>{{noticia.creat_en}}</small>
-      <p>{{noticia.text}}</p>
-      {% if noticia.document %}
-        <p>Document Annexe: <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a></p>
-      {% endif %}
-    {% endfor %}
+<div class="main_block">
+  {% if not user.is_authenticated %}
+  <div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+     Encara no t'has autentificat, ara tens accés limitat a la intranet, per accedir a tots els recursos es necessari entrar amb el teu usuari.
+  </div>
+  {% endif %}
+  <div class="noticies">
+    <div>
+      <h3>NOTÍCIES DESTACADES</h3>
+      {% for noticia in noticies %}
+        <div class="col well">
+          <h4 class="titol">{{noticia.titol}}</h4>
+          <small class="data">{{noticia.creat_en}}</small>
+          <p class="text">{{noticia.text}}</p>
+          {% if noticia.document %}
+            <p>Document Annexe: <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a></p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

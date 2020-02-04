@@ -22,7 +22,7 @@
         {% endif %}
       {% endblock %}
     </div>
-    <div id="main_block">
+    <div class="main_block">
       <div id="options_block">
         <ul class="menu_options">
           <li><a href="{% url 'indexIntranet' %}" class="active">Inici</a></li>
@@ -33,16 +33,16 @@
           <li><a href="">Directori del Personal</a></li>
           <li><a href="">Altres</a></li>
           {% if not user.is_authenticated %}
-            <li class="menu_options_dreta"><a href="{% url 'login' %}">Entrar</a></li>
+            <li class="menu_options_dreta"><a href="{% url 'login' %}" class="active">Entrar</a></li>
           {% endif %}
           {% if user.is_authenticated %}
-            <li class="menu_options_dreta"><a href="{% url 'logout' %}">Sortir</a></li>
+            <li class="menu_options_dreta"><a href="{% url 'logout' %}" class="active">Sortir</a></li>
             <li class="menu_options_dreta">
             <a href="/permivac/tramitador/accounts/password_change/">Canviar la contrasenya</a></li>
           {% endif %}
         </ul>
       </div>
-      <div id="second_block">
+      <div class="second_block">
           <div class="col-md-2 well">
             <h5>Aplicaicons i Extranets:</h5>
             <ul>
@@ -65,7 +65,7 @@
           <h5>Manuals:</h5>
           <ul>
             {% for manual in manuals %}
-              <li><a href='/static/documents/upload/{{manual.document}}'>{{ manual.titol }}</a></li>
+              <li><a target="_blank" href='/static/documents/upload/{{manual.document}}'>{{ manual.titol }}</a></li>
             {% endfor %}
           </ul>
       </div>
