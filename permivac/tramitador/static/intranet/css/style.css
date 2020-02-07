@@ -24,11 +24,12 @@
   height: auto;
   justify-content:flex-start;
 
-}.second_block{
+}.second_block_fixed{
   margin-top: 10px;
   display:flex;
   flex-direction:row;
-  width:100%;
+  max-width:"200px";
+  min-width:"200px";
   height: auto;
   justify-content:space-between;
 }.block{
