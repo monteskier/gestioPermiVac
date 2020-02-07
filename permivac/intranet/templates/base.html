@@ -56,8 +56,12 @@
                 <li><a href="{{link.url}}" target="_blank">{{link.titol}}</a></li>
               {% endfor %}
             </ul>
-            <h5>El temps:</h5>
-            <div id="c_67c8b370608df36bfc3e34abad6e4181" class="normal"></div>
+            <h5>El Temps <button id="meteo" class="glyphicon glyphicon-resize-full"></button></h5>
+
+
+            <iframe src="https://static-m.meteo.cat/ginys/municipal8d?location=082628&language=ca&color=2c3e50&tempFormat=ºC" title="Predicció municipal a 8 dies" frameborder="0" style="border: 0" scrolling="yes" width="200" height="218"></iframe>
+
+            <!--<div id="c_67c8b370608df36bfc3e34abad6e4181" class="normal"></div>-->
         </div>
         {% block content %}
         {% endblock %}
@@ -71,9 +75,34 @@
       </div>
       </div>
     </div>
-    <script type="text/javascript" src="https://ca.eltiempo.es/widget/widget_loader/67c8b370608df36bfc3e34abad6e4181"></script>
-    {% block javascript %}
+    <!--<script type="text/javascript" src="https://ca.eltiempo.es/widget/widget_loader/67c8b370608df36bfc3e34abad6e4181"></script>-->
+    <script src="{% static 'js/jquery-3.4.1.js' %}"></script>
 
-    {% endblock %}
   </body>
+  {% block javascript %}
+  <script>
+    $(document).ready(function(e){
+
+      $("#meteo").click(function(e){
+
+        var ample = $('iframe').width();
+        console.log(ample);
+        if(ample > 200){
+          ample = 200;
+          console.log("Ara es fa petit");
+          $(this).removeClass('glyphicon glyphicon-resize-small');
+          $(this).addClass('glyphicon glyphicon-resize-full');
+
+        }else if(ample < 520 ){
+          console.log("Ara es fa gràn");
+          $(this).removeClass('glyphicon glyphicon-resize-full');
+          $(this).addClass('glyphicon glyphicon-resize-small');
+
+          ample = 520;
+        }
+        $('iframe').width(ample);
+      });
+    });
+  </script>
+  {% endblock %}
   <html>
