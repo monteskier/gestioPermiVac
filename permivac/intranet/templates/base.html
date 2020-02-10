@@ -42,7 +42,7 @@
           {% endif %}
         </ul>
       </div>
-      <div class="second_block_fixed">
+      <div class="second_block">
           <div class="col-md-2 well">
             <h5>Aplicacions i Extranets:</h5>
             <ul>
@@ -56,14 +56,16 @@
                 <li><a href="{{link.url}}" target="_blank">{{link.titol}}</a></li>
               {% endfor %}
             </ul>
-            <h5>El Temps <button id="meteo" class="glyphicon glyphicon-resize-full"></button></h5>
-            <iframe src="https://static-m.meteo.cat/ginys/municipal8d?location=082628&language=ca&color=2c3e50&tempFormat=ºC" title="Predicció municipal a 8 dies" frameborder="0" style="border: 0" scrolling="yes" width="200" height="218"></iframe>
+            <div id="meteo">
+              <h5>El Temps <button id="meteo" class="glyphicon glyphicon-resize-full"></button></h5>
+              <iframe src="https://static-m.meteo.cat/ginys/municipal8d?location=082628&language=ca&color=2c3e50&tempFormat=ºC" title="Predicció municipal a 8 dies" frameborder="0" style="border: 0" scrolling="yes" width="200" height="218"></iframe>
+            </div>
             <!--<div id="c_67c8b370608df36bfc3e34abad6e4181" class="normal"></div>-->
         </div>
         {% block content %}
         {% endblock %}
         <div class="col-md-2 well">
-          <h5>Manuals:</h5>
+        <h5>Manuals:</h5>
           <ul>
             {% for manual in manuals %}
               <li><a target="_blank" href='/static/documents/upload/{{manual.document}}'>{{ manual.titol }}</a></li>
@@ -80,7 +82,7 @@
   <script>
     $(document).ready(function(e){
 
-      $("#meteo").click(function(e){
+      $("#meteo button").click(function(e){
 
         var ample = $('iframe').width();
         console.log(ample);

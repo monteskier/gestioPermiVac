@@ -24,7 +24,11 @@
   height: auto;
   justify-content:flex-start;
 
-}.second_block_fixed{
+}#meteo{
+  z-index: 100;
+  position: absolute;
+
+}.second_block{
   margin-top: 10px;
   display:flex;
   flex-direction:row;
