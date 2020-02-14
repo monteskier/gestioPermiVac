@@ -2,6 +2,7 @@ from django.shortcuts import render
 from tramitador.models import Treballadors
 from django.shortcuts import redirect
 from .models import Links, Noticia, Manual
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -28,7 +29,16 @@ def index(request):
         user = get_object_or_404(Treballadors, pk=pk)
         request.user = user
         auth.login(request, user)
+    page = request.GET.get('page', 1)
     noticies = Noticia.objects.all().filter(publicat=True).exclude(destacada=False).order_by('-creat_en')
+    paginator = Paginator(noticies, 4)
+    try:
+        noticies = paginator.page(page)
+    except PageNotAnInteger:
+        noticies = paginator.page(1)
+    except EmptyPage:
+        noticies = paginator.page(paginator.num_pages)
+
     noticies = {'noticies':noticies}
     manual = getManual()
     context = getMenu(request)
