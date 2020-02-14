@@ -53,7 +53,17 @@ def redireccio(request):
     return response
 
 def noticies(request):
+    page = request.GET.get('page', 1)
     noticies = Noticia.objects.all().filter(publicat=True)
+    paginator = Paginator(noticies, 4)
+    try:
+        noticies = paginator.page(page)
+    except PageNotAnInteger:
+        noticies = paginator.page(1)
+    except EmptyPage:
+        noticies = paginator.page(paginator.num_pages)
+
+
     context = {'noticies':noticies}
     menu = getMenu(request)
     manual = getManual()
