@@ -1,5 +1,5 @@
 from django.db import models
-from tramitador.models import Area
+from tramitador.models import Area, Treballadors
 from django.utils import timezone
 import datetime
 
@@ -23,7 +23,7 @@ class Noticia(models.Model):
     creat_en = models.DateTimeField(auto_now_add=True)
     publicat = models.BooleanField(default=False)
     destacada = models.BooleanField(default=False)
-    
+    treballador = models.ForeignKey(Treballadors, on_delete=models.CASCADE, blank=True, null=True)
     def __str__(self):
         return self.titol
 

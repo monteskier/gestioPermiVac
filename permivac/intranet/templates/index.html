@@ -8,13 +8,17 @@
      Encara no t'has autentificat, ara tens accés limitat a la intranet, per accedir a tots els recursos es necessari entrar amb el teu usuari.
   </div>
   {% endif %}
+  {% if user.is_authenticated %}
+    <button type="button" id="btn_newpost" class="btn btn-primary btn-lg btn-block" href='{% url "nova_noticia" %}'>Publica una nova notícia</button>
+  {% endif %}
+
   <div class="noticies">
     <div>
       <h3>NOTÍCIES DESTACADES</h3>
       {% for noticia in noticies %}
         <div class="col well">
           <h4 class="titol">{{noticia.titol}}</h4>
-          <small class="data">{{noticia.creat_en}}</small>
+          <small class="data">{{noticia.creat_en}} Editor: Sr/a {{noticia.treballador.first_name}} {{noticia.treballador.last_name}} </small>
           <p class="text">{{noticia.text}}</p>
           {% if noticia.document %}
             <p>Document Annex: <a href='/static/documents/upload/{{noticia.document}}' class="glyphicon glyphicon-save-file"></a></p>
@@ -45,4 +49,14 @@
     </div>
   </div>
 </div>
+{% endblock %}
+{% block javascript %}
+  <script>
+    $(document).ready(function(e){
+      $("#btn_newpost").click(function(e){
+        event.preventDefault();
+        window.open($(this).attr("href"), '{% url "nova_noticia" %}', "width=600,height=600,scrollbars=yes");
+      });
+    });
+  </script>
 {% endblock %}

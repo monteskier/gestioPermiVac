@@ -23,6 +23,7 @@
       {% endblock %}
     </div>
     <div class="main_block">
+    {% block menu_principal %}
       <div id="options_block">
         <ul class="menu_options">
           <li><a href="{% url 'indexIntranet' %}" class="active">Inici</a></li>
@@ -42,7 +43,9 @@
           {% endif %}
         </ul>
       </div>
-      <div class="second_block">
+    {% endblock %}
+    <div class="second_block">
+    {% block links %}
           <div class="col-md-2 well">
             <h5>Aplicacions i Extranets:</h5>
             <ul>
@@ -62,16 +65,21 @@
             </div>
             <!--<div id="c_67c8b370608df36bfc3e34abad6e4181" class="normal"></div>-->
         </div>
+        {% endblock %}
+
         {% block content %}
         {% endblock %}
-        <div class="col-md-2 well">
-        <h5>Manuals:</h5>
-          <ul>
-            {% for manual in manuals %}
-              <li><a target="_blank" href='/static/documents/upload/{{manual.document}}'>{{ manual.titol }}</a></li>
-            {% endfor %}
-          </ul>
-      </div>
+
+        {% block manuals %}
+          <div class="col-md-2 well">
+          <h5>Manuals:</h5>
+            <ul>
+              {% for manual in manuals %}
+                <li><a target="_blank" href='/static/documents/upload/{{manual.document}}'>{{ manual.titol }}</a></li>
+              {% endfor %}
+            </ul>
+        </div>
+      {% endblock %}
       </div>
     </div>
     <!--<script type="text/javascript" src="https://ca.eltiempo.es/widget/widget_loader/67c8b370608df36bfc3e34abad6e4181"></script>-->

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block menu_principal %}
+{% endblock %}
+{% block links %}
+{% endblock %}
+{% block content %}
+{% csrf_token %}
+<div>
+  <form method="POST">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+      <div class="form-group well second_block_form">
+        {{field.label_tag}}
+        {{field}}
+        {% if field.help_text %}
+          <small class="form-text text-muted">{{field.help_text}}</small>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <input class="btn btn-success" type="submit" value="Desar">
+    </form>
+</div>
+  {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field.errors }}
+    {{ hidden_field }}
+  {% endfor %}
+
+{% endblock %}
+{% block manuals %}
+{% endblock %}

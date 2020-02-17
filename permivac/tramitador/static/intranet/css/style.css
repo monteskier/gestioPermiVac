@@ -36,6 +36,14 @@
   min-width:"200px";
   height: auto;
   justify-content:space-between;
+}.second_block{
+  margin-top: 10px;
+  display:flex;
+  flex-direction:row;
+  max-width:"200px";
+  min-width:"200px";
+  height: auto;
+  justify-content:flex-start;
 }.block{
   display:flex;
   flex-direction:column;

@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from tramitador.models import Treballadors
 from django.shortcuts import redirect
 from .models import Links, Noticia, Manual
+from .forms import NoticiaForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
@@ -70,3 +72,17 @@ def noticies(request):
     context.update(menu)
     context.update(manual)
     return render(request, 'noticies.html',context)
+
+def nova_noticia(request):
+    if request.method =='POST':
+        form = NoticiaForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.treballador = request.user
+            post.save()
+            return HttpResponse("Notícia publicada correctament.")
+        else:
+            return HttpResponse("Dades incorrectes, no s'ha pogut desar")
+    else:
+        form = NoticiaForm()
+        return render(request, 'nova.html',{'form':form})
