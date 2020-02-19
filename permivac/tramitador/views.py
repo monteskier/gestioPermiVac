@@ -152,6 +152,7 @@ def assignades(request):
         rol.append('politics')
 
     if(tramits_pendents_RRHH != None):
+        tramits_pendents = None
         context = {'tramits_pendents': tramits_pendents,'rol': rol, 'tramits_pendents_RRHH':tramits_pendents_RRHH }
         return render(request, 'tramits/assignades.html', context)
     else:
