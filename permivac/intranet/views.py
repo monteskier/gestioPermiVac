@@ -75,10 +75,11 @@ def noticies(request):
 
 def nova_noticia(request):
     if request.method =='POST':
-        form = NoticiaForm(request.POST)
+        form = NoticiaForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.treballador = request.user
+            oplinkform = oplinkform(request.POST)
             post.save()
             return HttpResponse("Notícia publicada correctament.")
         else:
