@@ -56,7 +56,7 @@ def redireccio(request):
 
 def noticies(request):
     page = request.GET.get('page', 1)
-    noticies = Noticia.objects.all().filter(publicat=True)
+    noticies = Noticia.objects.all().filter(publicat=True).order_by('-creat_en')
     paginator = Paginator(noticies, 4)
     try:
         noticies = paginator.page(page)
