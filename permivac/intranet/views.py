@@ -79,7 +79,7 @@ def nova_noticia(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.treballador = request.user
-            oplinkform = oplinkform(request.POST)
+            '''oplinkform = oplinkform(request.POST)'''
             post.save()
             return HttpResponse("Notícia publicada correctament.")
         else:
