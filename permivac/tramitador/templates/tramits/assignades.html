@@ -19,13 +19,13 @@
   <h4>Tramits Pendents de finalitzar:</h4>
     <table class="TFtable">
       <tr>
-        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Missatge Usuari</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Data sol·licitud</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
         <th>Validacio Politic</th>
       </tr>
       {% for tramit in tramits_pendents %}
       <tr>
         <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
-        <td>{{tramit.missatge_usuari}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" onclick="return confirm('Estas segur de vole eliminar el tràmit?')" class="glyphicon glyphicon-remove"></a></td>
+        <td>{{tramit.data_sol}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" onclick="return confirm('Estas segur de vole eliminar el tràmit?')" class="glyphicon glyphicon-remove"></a></td>
         <td>
           {% if tramit.document %}
 
@@ -71,13 +71,13 @@
     <h4>Tramits Pendents com a RRHH:</h4>
     <table class="TFtable">
       <tr>
-        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Missatge Usuari</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
+        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Data Sol·licitud</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
         <th>Validacio Politic</th>
       </tr>
       {% for tramit in tramits_pendents_RRHH %}
       <tr>
         <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
-        <td>{{tramit.missatge_usuari}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" onclick="return confirm('Estas segur de vole eliminar el tràmit?')" class="glyphicon glyphicon-remove"></a></td>
+        <td>{{tramit.data_sol}}</td><td>{{tramit.finalitzat}}</td><td><a href="{% url 'tramit_eliminar' tramit.id %}" onclick="return confirm('Estas segur de vole eliminar el tràmit?')" class="glyphicon glyphicon-remove"></a></td>
         <td>
           {% if tramit.document %}
 
