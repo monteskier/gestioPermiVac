@@ -179,7 +179,7 @@ def historic(request):
     today = datetime.date.today()
     groups = request.user.groups.all()
     page = request.GET.get('page', 1)
-    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True))
+    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True)).order_by('-data_sol')
     paginator = Paginator(tramits_finalitzats, 4)
     try:
         calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)

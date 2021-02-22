@@ -6,12 +6,11 @@
 
     <table class="TFtable">
       <tr>
-        <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Missatge Usuari</th><th>Finalitzat?</th><th>Document</th>
-        <th>Validacio responsable</th><th>Validacio RRHH</th><th>Validacio Politic</th>
+        <th>Tràmit</th><th>Data Sol</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Missatge Usuari</th><th>Finalitzat?</th><th>Document</th>
       </tr>
       {% for tramit in tramits_finalitzats %}
       <tr>
-        <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
+        <td><a href="{% url 'tramit_detall' tramit.id %}">Veure tràmit num:{{tramit.id}}</a></td><td>{{tramit.data_sol}}</td><td>{{tramit.tipus}}</td><td>{{tramit.treballador.first_name}}</td><td>{{tramit.treballador.last_name}}</td>
         <td>{{missatge_usuari}}</td><td>{{tramit.finalitzat}}</td>
         <td>
           {% if tramit.document %}
@@ -21,7 +20,6 @@
             Sense documents
           {% endif %}
         </td>
-        <td>{{tramit.valResp}}</td><td>{{tramit.valRRHH}}</td><td>{{tramit.valPol}}</td>
       </tr>
       {% endfor %}
     </table>
