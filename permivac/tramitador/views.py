@@ -16,6 +16,7 @@ from django.conf import settings
 from django.db.models import Q
 from django.core.mail import send_mail
 from django.forms.models import model_to_dict
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def redireccio(request):
@@ -177,12 +178,28 @@ def assignades(request):
 def historic(request):
     today = datetime.date.today()
     groups = request.user.groups.all()
-    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True) &Q(creat_en__year=today.year))
+    page = request.GET.get('page', 1)
+    tramits_finalitzats = Tramit.objects.all().filter(Q(treballador__id=request.user.id) & Q(finalitzat=True))
+    paginator = Paginator(tramits_finalitzats, 4)
     try:
         calendari = Calendari.objects.get(treballador__id = request.user.id, any=today.year)
+        try:
+            tramits_finalitzats = paginator.page(page)
+        except PageNotAnInteger:
+            tramits_finalitzats = paginator.page(1)
+        except EmptyPage:
+            tramits_finalitzats = paginator.page(paginator.num_pages)
+
         context = {'tramits_finalitzats': tramits_finalitzats, 'calendari':calendari}
         return render(request, 'tramits/historic.html', context)
+
     except Calendari.DoesNotExist:
+        try:
+            tramits_finalitzats = paginator.page(page)
+        except PageNotAnInteger:
+            tramits_finalitzats = paginator.page(1)
+        except EmptyPage:
+            tramits_finalitzats = paginator.page(paginator.num_pages)
 
         context = {'tramits_finalitzats': tramits_finalitzats}
         return render(request, 'tramits/historic.html', context)
