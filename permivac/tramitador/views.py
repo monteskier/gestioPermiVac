@@ -302,3 +302,8 @@ def delete_document(request):
         response_data['result'] = 'Error'
         response_data['message'] = "No s'ha pogut eliminar el document."
         return JsonResponse(response_data)
+
+@login_required
+def marcatges(request):
+    #Aqui tenim que fer el post al ws amb el usuari i la contraenya del user id chrosschex
+    return render(request, 'tramits/marcatges.html')

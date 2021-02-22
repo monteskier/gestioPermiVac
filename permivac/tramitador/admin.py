@@ -23,7 +23,7 @@ class CustomUserAdmin(UserAdmin):
                     'classes': ('wide',),
                     'fields': ('username','password')}),
                     ('Dades Perosnals',{'fields':('first_name','last_name','email','dni')}),
-                    ('Dades sobre el treballador',{'fields':('areas','observacions','foto')}),
+                    ('Dades sobre el treballador',{'fields':('areas','observacions','foto','id_crosschex','pass_crosschex')}),
                     ('Permissos',{'fields':('is_active','is_staff','is_superuser','groups','representant')}),
                     ('Dades interesants',{'fields':('last_login','date_joined',)}),
 

@@ -37,6 +37,8 @@ class Treballadors(AbstractUser):
     email = models.CharField(max_length=50)"""
     dni = models.CharField(max_length=20, null = True, blank=True)
     areas = models.ManyToManyField(Area)
+    id_crosschex = models.IntegerField(max_length=4, null = True, blank=True)
+    pass_crosschex =  models.IntegerField(max_length=4, null = True, blank=True)
     observacions = models.TextField(null = True, blank=True)
     """rol = models.CharField(max_length=20, choices = tip_rols, default = 'treb')
     estat = models.CharField(max_length=10, choices = tip_estats, default = 'alta')"""
