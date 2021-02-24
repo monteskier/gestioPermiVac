@@ -1,4 +1,20 @@
 {% extends 'tramits/base.html' %}
 {% block content %}
-
+<h4>Llistat dels últims 25 Marcatges</h4>
+<table class="TFtable">
+  <tr>
+    <th>Dia i Hora</th><th>Operació</th>
+  </tr>
+    {% for row in data %}
+    <tr>
+      <td>{{row.CheckTime.date}}</td>
+    {% if row.CheckType == 0 %}
+      <td>Entrada</td>
+    {% elif row.CheckType == 1%}
+      <td>Sortida</td>
+    {% endif %}
+    </tr>
+  {% endfor %}
+  </tr>
+</table>
 {% endblock %}

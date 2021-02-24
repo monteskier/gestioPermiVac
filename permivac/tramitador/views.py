@@ -17,6 +17,7 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.forms.models import model_to_dict
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import requests
 # Create your views here.
 
 def redireccio(request):
@@ -306,4 +307,6 @@ def delete_document(request):
 @login_required
 def marcatges(request):
     #Aqui tenim que fer el post al ws amb el usuari i la contraenya del user id chrosschex
-    return render(request, 'tramits/marcatges.html')
+    payload = {'marcatges':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
+    data = requests.post("http://marcatgepersonal.svc.cat/ws/webservices.php", data=payload).json()
+    return render(request, 'tramits/marcatges.html',{'data':data})
