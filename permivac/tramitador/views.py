@@ -307,6 +307,10 @@ def delete_document(request):
 @login_required
 def marcatges(request):
     #Aqui tenim que fer el post al ws amb el usuari i la contraenya del user id chrosschex
-    payload = {'marcatges':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
-    data = requests.post("http://marcatgepersonal.svc.cat/ws/webservices.php", data=payload).json()
-    return render(request, 'tramits/marcatges.html',{'data':data})
+    try:
+        payload = {'marcatges':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
+        data = requests.post("http://marcatgepersonal.svc.cat/ws/webservices.php", data=payload).json()
+        return render(request, 'tramits/marcatges.html',{'data':data})
+    except:
+
+        return render(request, 'tramits/marcatges.html')
