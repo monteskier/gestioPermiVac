@@ -308,8 +308,16 @@ def delete_document(request):
 def marcatges(request):
     #Aqui tenim que fer el post al ws amb el usuari i la contraenya del user id chrosschex
     try:
+        page = request.GET.get('page', 1)
         payload = {'marcatges':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
         data = requests.post("http://marcatgepersonal.svc.cat/ws/webservices.php", data=payload).json()
+        paginator = Paginator(data, 10)
+        try:
+            data = paginator.page(page)
+        except PageNotAnInteger:
+            data = paginator.page(1)
+        except EmptyPage:
+            data = paginator.page(paginator.num_pages)
         return render(request, 'tramits/marcatges.html',{'data':data})
     except:
 
