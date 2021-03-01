@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from .models import Links, Noticia, Manual
 from .forms import NoticiaForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+import requests, json
 
 # Create your views here.
 
@@ -87,3 +88,18 @@ def nova_noticia(request):
     else:
         form = NoticiaForm()
         return render(request, 'nova.html',{'form':form})
+
+def marcatge(request):
+    op = request.GET.get('operacio');
+    if(op=="entrada"):
+        payload = {'entrada_intr':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
+        data = requests.post("http://localhost/ws/webservices.php", data=payload).json()
+        json_data = json.dumps(data)
+        print(data)
+        return HttpResponse(json_data, content_type="application/json")
+    elif(op=="sortida"):
+        payload = {'sortida_intr':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
+        data = requests.post("http://localhost/ws/webservices.php", data=payload).json()
+        json_data = json.dumps(data)
+        print(data)
+        return HttpResponse(json_data, content_type="application/json")

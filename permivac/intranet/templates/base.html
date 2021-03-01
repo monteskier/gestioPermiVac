@@ -72,6 +72,12 @@
 
         {% block manuals %}
           <div class="col-md-2 well">
+            <h5>Operacions de marcatge:</h5>
+            <!-- Aqui ha de anar els logos de marcar entrada i sortida -->
+            <div class="fitxar">
+              <img id="marc_entrada" src="{% static 'intranet/logos/inside.png' %}" alt="Entrada"></img><small>Entrada</small>
+              <img id="marc_sortida" src="{% static 'intranet/logos/outside.png' %}" alt="Sortida"></img><small>Sortida</small>
+            </div>
           <h5>Manuals:</h5>
             <ul>
               {% for manual in manuals %}
@@ -89,6 +95,25 @@
 
   <script>
     $(document).ready(function(e){
+      $("#marc_entrada").click(function(e){
+        $.ajax({
+          url: "{% url 'marcatge' %}",
+          type: "GET",
+          data: {"operacio":"entrada"}
+        }).done(function (result) {
+            alert("msg:"+result[0].msg);
+         });
+        });
+
+      $("#marc_sortida").click(function(e){
+        $.ajax({
+          url: "{% url 'marcatge' %}",
+          type: "GET",
+          data: {"operacio":"sortida"}
+          }).done(function (result) {
+            alert("msg:"+result[0].msg);
+         });
+      });
 
       $("#meteo button").click(function(e){
 

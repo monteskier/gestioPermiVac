@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.index, name='indexIntranet'),
     url(r'^noticies/',views.noticies, name='noticies'),
     url(r'^nova_noticia/',views.nova_noticia, name='nova_noticia'),
+    url(r'^marcatge/',views.marcatge, name='marcatge'),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 if settings.DEBUG:

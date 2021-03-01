@@ -27,7 +27,17 @@
 }#meteo{
   z-index: 100;
   position: absolute;
-
+}.fitxar{
+  display: flex;
+  justify-content:space-around;
+  flex-direction:row;
+  cursor: pointer;
+}.fitxar img{
+  width: 32px;
+  height: 32px;
+}.fitxar:focus img{
+    border: 2px solid blue;
+    
 }.second_block{
   margin-top: 10px;
   display:flex;
