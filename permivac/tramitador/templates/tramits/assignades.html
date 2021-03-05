@@ -17,7 +17,7 @@
 </div>
   {% if tramits_pendents %}
   <h4>Tramits Pendents de finalitzar:</h4>
-    <table class="TFtable">
+    <table class="TFtable sortable ordenable">
       <tr>
         <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Data sol·licitud</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
         <th>Validacio Politic</th>
@@ -69,7 +69,7 @@
 
   {% if tramits_pendents_RRHH %}
     <h4>Tramits Pendents com a RRHH:</h4>
-    <table class="TFtable">
+    <table class="TFtable sortable ordenable">
       <tr>
         <th>Tràmit</th><th>Tipus</th><th>Nom</th><th>Cognoms</th><th>Data Sol·licitud</th><th>Finalitzat?</th><th>Accions</th><th>Document</th><th>Missatge</th><th>Validacio Responable</th><th>Validacio RRHH</th>
         <th>Validacio Politic</th>
@@ -120,10 +120,8 @@
       <p>No hi han tramits pendentsde de tramitar...</p>
     {% endif %}
 {% endblock %}
-
 {% block javascript %}
   <script>
-
     $(document).ready(function(){
       $("button[name=missatges_btn]").click(function(e){
         console.log("Valor = "+$(this).val());
@@ -142,5 +140,4 @@
       });
     });
   </script>
-
 {% endblock %}
