@@ -37,7 +37,7 @@
   height: 32px;
 }.fitxar:focus img{
     border: 2px solid blue;
-    
+
 }.second_block{
   margin-top: 10px;
   display:flex;
@@ -54,6 +54,15 @@
   min-width:"200px";
   height: auto;
   justify-content:flex-start;
+}.second_block ul{
+  list-style-position: inside;
+  padding-left: 0;
+  list-style: none;
+}.second_block h5{
+  font-weight: bold;
+}.fitxar{
+  padding-top:20px;
+  padding-bottom: 20px;
 }.block{
   display:flex;
   flex-direction:column;
