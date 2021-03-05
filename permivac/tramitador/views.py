@@ -36,6 +36,19 @@ def index(request):
     context = {'tramits_pendents': tramits_pendents, 'subordinats': subordinats}
     return render(request, 'tramits/index.html', context)
 
+#Funcio que ens serveix per paginar els resultats de cuasevol template que volguem
+def paginar(page,data,num):
+    paginator = Paginator(data, 10)
+
+    try:
+        data = paginator.page(page)
+    except PageNotAnInteger:
+        data = paginator.page(1)
+    except EmptyPage:
+        data = paginator.page(paginator.num_pages)
+
+    return data
+
 @login_required
 def tramit_detall(request, pk):
     tramit = get_object_or_404(Tramit, pk=pk)
@@ -140,17 +153,16 @@ def assignades(request):
     if "responsables" in l:
         tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( Q(valResp = "espera") | Q(valRRHH="inconforme")).exclude(finalitzat = True)
         if "RRHH" in l:
-            tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True)
+            tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True).order_by('treballador','creat_en')
             rol.append("RRHH")
         rol.append("responsables")
-
-
+        
     elif "RRHH" in l:
-        tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True)
+        tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True).order_by('treballador','creat_en')
         rol.append("RRHH")
 
     elif "politics" in l:
-        tramits_pendents = Tramit.objects.all().filter(Q(valRRHH = "conforme") & Q(finalitzat = False))
+        tramits_pendents = Tramit.objects.all().filter(Q(valRRHH = "conforme") & Q(finalitzat = False)).order_by('treballador','creat_en')
         rol.append('politics')
 
     if(tramits_pendents_RRHH != None):
@@ -308,17 +320,12 @@ def delete_document(request):
 def marcatges(request):
     #Aqui tenim que fer el post al ws amb el usuari i la contraenya del user id chrosschex
     try:
-        page = request.GET.get('page', 1)
+
         payload = {'marcatges':1,'user': str(request.user.id_crosschex), 'password': str(request.user.pass_crosschex)}
         data = requests.post("http://marcatgepersonal.svc.cat/ws/webservices.php", data=payload).json()
-        paginator = Paginator(data, 10)
-        try:
-            data = paginator.page(page)
-        except PageNotAnInteger:
-            data = paginator.page(1)
-        except EmptyPage:
-            data = paginator.page(paginator.num_pages)
-        return render(request, 'tramits/marcatges.html',{'data':data})
+        result = paginar(request.GET.get('page', 1), data, 10)
+
+        return render(request, 'tramits/marcatges.html',{'data':result})
     except:
 
         return render(request, 'tramits/marcatges.html')
