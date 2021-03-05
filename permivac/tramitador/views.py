@@ -153,16 +153,16 @@ def assignades(request):
     if "responsables" in l:
         tramits_pendents = Tramit.objects.all().filter(treballador__areas__in = request.user.areas.all()).filter( Q(valResp = "espera") | Q(valRRHH="inconforme")).exclude(finalitzat = True)
         if "RRHH" in l:
-            tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True).order_by('treballador')
+            tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True).order_by('treballador','creat_en')
             rol.append("RRHH")
         rol.append("responsables")
 
     elif "RRHH" in l:
-        tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True).order_by('treballador')
+        tramits_pendents_RRHH = Tramit.objects.all().filter(~Q(valResp ="espera")).exclude(finalitzat = True).order_by('treballador','creat_en')
         rol.append("RRHH")
 
     elif "politics" in l:
-        tramits_pendents = Tramit.objects.all().filter(Q(valRRHH = "conforme") & Q(finalitzat = False)).order_by('treballador')
+        tramits_pendents = Tramit.objects.all().filter(Q(valRRHH = "conforme") & Q(finalitzat = False)).order_by('treballador','creat_en')
         rol.append('politics')
 
     if(tramits_pendents_RRHH != None):
